@@ -1,18 +1,1 @@
-﻿/* tokens go here */
-/* src/app/globals.css (or src/styles/globals.css) */
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
-@theme {
-  --color-ink: #1C1B19;
-  --color-paper: #EDE8DF;
-  --color-paper2: #E3DDD0;
-  --color-steel: #4C6B77;
-  --color-rust: #B5502A;
-  --color-stone: #9C9689;
-  --color-chalk: #FAF9F6;
-
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
-}
+﻿
