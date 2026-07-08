@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MatriQ — Design System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#1C1B19',
+          paper: '#EDE8DF',
+          paper2: '#E3DDD0',
+          steel: '#4C6B77',
+          rust: '#B5502A',
+          stone: '#9C9689',
+          chalk: '#FAF9F6',
+        },
+        fontFamily: {
+          display: ['Space Grotesk', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['IBM Plex Mono', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .stamp { border: 1.5px dashed #9C9689; border-radius: 9999px; }
+  .tab-notch { clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%); }
+  .swatch-metal { background: repeating-linear-gradient(115deg, rgba(255,255,255,0.16) 0 2px, transparent 2px 6px), linear-gradient(160deg, #B9BFC2 0%, #7C868B 45%, #4C555A 100%); }
+</style>
+</head>
+<body class="bg-paper text-ink antialiased">
+
+  <header class="border-b border-ink/10 bg-paper/95 sticky top-0 backdrop-blur z-10">
+    <div class="max-w-6xl mx-auto px-6 lg:px-10 py-6 flex items-baseline justify-between">
+      <div class="flex items-baseline gap-3">
+        <span class="font-display font-700 text-2xl tracking-tight">MatriQ</span>
+        <span class="font-mono text-[11px] tracking-[0.18em] text-stone uppercase">Design System v1</span>
+      </div>
+      <span class="font-mono text-[11px] text-stone">For all frontend contributors</span>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 lg:px-10 py-14 space-y-20">
+
+    <!-- INTRO -->
+    <section>
+      <span class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase">Reference</span>
+      <h1 class="font-display font-700 text-4xl mt-3 tracking-tight">One source of truth for how MatriQ looks.</h1>
+      <p class="text-ink/70 mt-4 max-w-2xl leading-relaxed">Copy the tokens below into your own pages instead of eyeballing colors from the mockup. Every hex value, font, and spacing rule here is exactly what the landing page uses — if your page uses these same tokens, it'll look like it belongs.</p>
+    </section>
+
+    <!-- COLORS -->
+    <section>
+      <h2 class="font-display font-600 text-2xl mb-1">Colors</h2>
+      <p class="text-ink/60 text-sm mb-6">Warm, industrial palette — no default SaaS blue, no AI-cream. Rust is a signal color: use it sparingly, for primary actions only.</p>
+      <div class="grid sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="rounded-sm overflow-hidden border border-ink/10">
+          <div class="h-20 bg-ink"></div>
+          <div class="p-3 bg-paper">
+            <p class="font-display font-600 text-sm">Ink</p>
+            <p class="font-mono text-xs text-stone">#1C1B19</p>
+            <p class="font-mono text-[10px] text-stone mt-1">text-ink / bg-ink</p>
+          </div>
+        </div>
+        <div class="rounded-sm overflow-hidden border border-ink/10">
+          <div class="h-20 bg-paper border-b border-ink/10"></div>
+          <div class="p-3 bg-paper">
+            <p class="font-display font-600 text-sm">Paper</p>
+            <p class="font-mono text-xs text-stone">#EDE8DF</p>
+            <p class="font-mono text-[10px] text-stone mt-1">bg-paper (page bg)</p>
+          </div>
+        </div>
+        <div class="rounded-sm overflow-hidden border border-ink/10">
+          <div class="h-20 bg-paper2"></div>
+          <div class="p-3 bg-paper">
+            <p class="font-display font-600 text-sm">Paper 2</p>
+            <p class="font-mono text-xs text-stone">#E3DDD0</p>
+            <p class="font-mono text-[10px] text-stone mt-1">bg-paper2 (cards, sections)</p>
+          </div>
+        </div>
+        <div class="rounded-sm overflow-hidden border border-ink/10">
+          <div class="h-20 bg-steel"></div>
+          <div class="p-3 bg-paper">
+            <p class="font-display font-600 text-sm">Steel</p>
+            <p class="font-mono text-xs text-stone">#4C6B77</p>
+            <p class="font-mono text-[10px] text-stone mt-1">text-steel (eyebrows, links)</p>
+          </div>
+        </div>
+        <div class="rounded-sm overflow-hidden border border-ink/10">
+          <div class="h-20 bg-rust"></div>
+          <div class="p-3 bg-paper">
+            <p class="font-display font-600 text-sm">Rust</p>
+            <p class="font-mono text-xs text-stone">#B5502A</p>
+            <p class="font-mono text-[10px] text-stone mt-1">bg-rust (primary CTA only)</p>
+          </div>
+        </div>
+        <div class="rounded-sm overflow-hidden border border-ink/10">
+          <div class="h-20 bg-stone"></div>
+          <div class="p-3 bg-paper">
+            <p class="font-display font-600 text-sm">Stone</p>
+            <p class="font-mono text-xs text-stone">#9C9689</p>
+            <p class="font-mono text-[10px] text-stone mt-1">borders, secondary text</p>
+          </div>
+        </div>
+        <div class="rounded-sm overflow-hidden border border-ink/10">
+          <div class="h-20 bg-chalk border-b border-ink/10"></div>
+          <div class="p-3 bg-paper">
+            <p class="font-display font-600 text-sm">Chalk</p>
+            <p class="font-mono text-xs text-stone">#FAF9F6</p>
+            <p class="font-mono text-[10px] text-stone mt-1">text on dark backgrounds</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 p-3 bg-ink/5 border border-ink/10 rounded-sm">
+        <p class="font-mono text-xs text-ink/70">Rule: rust is the only saturated color on the page. If two things are rust at once, one of them shouldn't be.</p>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section>
+      <h2 class="font-display font-600 text-2xl mb-1">Typography</h2>
+      <p class="text-ink/60 text-sm mb-6">Three fonts, three jobs. Don't introduce a fourth.</p>
+      <div class="space-y-6">
+        <div class="border border-ink/10 rounded-sm p-6 bg-paper2/40">
+          <div class="flex items-baseline justify-between mb-3">
+            <span class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase">Display — Space Grotesk</span>
+            <span class="font-mono text-[11px] text-stone">headings, hero, prices</span>
+          </div>
+          <p class="font-display font-700 text-4xl">Source materials, verified.</p>
+          <p class="font-display font-600 text-xl mt-2">Section headings use font-600</p>
+        </div>
+        <div class="border border-ink/10 rounded-sm p-6 bg-paper2/40">
+          <div class="flex items-baseline justify-between mb-3">
+            <span class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase">Body — Inter</span>
+            <span class="font-mono text-[11px] text-stone">paragraphs, nav, buttons</span>
+          </div>
+          <p class="text-base text-ink/80">Body copy stays in Inter at text-base or text-lg, ink at 70-80% opacity rather than a lighter gray — keeps warmth consistent with the paper background.</p>
+        </div>
+        <div class="border border-ink/10 rounded-sm p-6 bg-paper2/40">
+          <div class="flex items-baseline justify-between mb-3">
+            <span class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase">Mono — IBM Plex Mono</span>
+            <span class="font-mono text-[11px] text-stone">specs, eyebrows, prices, labels</span>
+          </div>
+          <p class="font-mono text-sm">SS304 · Ø12mm · $0.92 / kg</p>
+          <p class="font-mono text-[11px] tracking-[0.18em] text-stone uppercase mt-2">Verified suppliers · Live specs</p>
+        </div>
+      </div>
+      <p class="font-mono text-xs text-ink/60 mt-4">Google Fonts import — paste this in every page's &lt;head&gt;:</p>
+      <div class="mt-2 bg-ink text-chalk font-mono text-xs p-4 rounded-sm overflow-x-auto">
+        &lt;link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"&gt;
+      </div>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section>
+      <h2 class="font-display font-600 text-2xl mb-1">Component patterns</h2>
+      <p class="text-ink/60 text-sm mb-6">Reuse these shapes rather than inventing new ones per page.</p>
+
+      <div class="grid sm:grid-cols-2 gap-8">
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-3">Buttons</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="px-5 py-2.5 bg-rust text-chalk rounded-sm font-medium text-sm">Primary action</button>
+            <button class="px-5 py-2.5 border border-ink/25 rounded-sm font-medium text-sm">Secondary</button>
+            <button class="px-5 py-2.5 text-ink/70 font-medium text-sm">Ghost / tertiary</button>
+          </div>
+          <p class="text-xs text-ink/50 mt-3">Only one primary (rust) button per view.</p>
+        </div>
+
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-3">Verification stamp</p>
+          <div class="flex items-center gap-4">
+            <span class="stamp w-12 h-12 flex items-center justify-center font-mono text-[10px] rotate-[-8deg]">OK</span>
+            <p class="text-xs text-ink/60 max-w-[220px]">Dashed circle, always slightly rotated. Use on verified listings/suppliers only.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-3">Category tab</p>
+          <div class="flex">
+            <div class="tab-notch bg-rust text-chalk px-6 py-2.5 font-mono text-xs tracking-[0.15em] uppercase">Active</div>
+            <div class="tab-notch bg-paper2 text-ink/70 px-6 py-2.5 font-mono text-xs tracking-[0.15em] uppercase -ml-2">Inactive</div>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-3">Material swatch card</p>
+          <div class="swatch-metal w-28 h-28 rounded-sm p-3 flex flex-col justify-end text-chalk">
+            <span class="font-display font-600 text-sm">Steel</span>
+            <span class="font-mono text-[10px] opacity-80">SS304 · Ø12mm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <p class="font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-3">Card container</p>
+        <div class="max-w-xs bg-paper rounded-sm overflow-hidden border border-ink/10">
+          <div class="swatch-metal h-24"></div>
+          <div class="p-4">
+            <p class="font-display font-600">Card title</p>
+            <p class="font-mono text-xs text-stone mt-1">Meta line in mono</p>
+          </div>
+        </div>
+        <p class="text-xs text-ink/50 mt-2">rounded-sm everywhere (not rounded-xl) — sharper, more industrial. border-ink/10 for hairline borders.</p>
+      </div>
+    </section>
+
+    <!-- RULES -->
+    <section>
+      <h2 class="font-display font-600 text-2xl mb-1">A few hard rules</h2>
+      <ul class="mt-4 space-y-2 text-sm text-ink/75">
+        <li class="flex gap-3"><span class="text-rust">—</span> Backgrounds are paper or paper2. Never pure white, never a gray-50 default.</li>
+        <li class="flex gap-3"><span class="text-rust">—</span> Corners are rounded-sm (2px), not rounded-lg/xl. Keep it sharp and industrial.</li>
+        <li class="flex gap-3"><span class="text-rust">—</span> Eyebrows (small uppercase labels above headings) are always font-mono, tracking-[0.18em], text-steel.</li>
+        <li class="flex gap-3"><span class="text-rust">—</span> Specs, prices, and codes are always font-mono — never Inter.</li>
+        <li class="flex gap-3"><span class="text-rust">—</span> Don't add a new accent color. If something needs emphasis, use rust — sparingly — or weight/size instead.</li>
+      </ul>
+    </section>
+
+    <!-- TAILWIND CONFIG -->
+    <section>
+      <h2 class="font-display font-600 text-2xl mb-1">Drop-in Tailwind config</h2>
+      <p class="text-ink/60 text-sm mb-4">Paste this into your tailwind.config.js (or the CDN config block) so class names like <span class="font-mono">bg-rust</span> or <span class="font-mono">font-display</span> work identically across everyone's pages.</p>
+      <pre class="bg-ink text-chalk font-mono text-xs p-5 rounded-sm overflow-x-auto leading-relaxed">theme: {
+  extend: {
+    colors: {
+      ink: '#1C1B19',
+      paper: '#EDE8DF',
+      paper2: '#E3DDD0',
+      steel: '#4C6B77',
+      rust: '#B5502A',
+      stone: '#9C9689',
+      chalk: '#FAF9F6',
+    },
+    fontFamily: {
+      display: ['Space Grotesk', 'sans-serif'],
+      body: ['Inter', 'sans-serif'],
+      mono: ['IBM Plex Mono', 'monospace'],
+    },
+  },
+}</pre>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-ink/10 mt-10">
+    <div class="max-w-6xl mx-auto px-6 lg:px-10 py-8">
+      <p class="font-mono text-[10px] tracking-wide text-stone uppercase">MatriQ Design System v1 · Keep this file updated as the design evolves</p>
+    </div>
+  </footer>
+
+</body>
+</html>
