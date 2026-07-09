@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useAuth } from "@/src/context/AuthContext";
 import { getMe } from "../api";
 import { register } from "../api";
+import BackButton from "@/src/components/ui/BackButton";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -43,6 +44,8 @@ export default function RegisterPage() {
     return (
     <div className="min-h-screen flex items-center justify-center bg-stone-50 px-6 py-12">
         <div className="w-full max-w-2xl rounded-xl border border-stone-200 bg-white shadow-lg p-8">
+
+        <BackButton></BackButton>
 
         {/* Header */}
         <div className="text-center mb-8">

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/src/context/AuthContext";
+import BackButton from "@/src/components/ui/BackButton";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -31,6 +32,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-stone-50 px-6">
   <div className="w-full max-w-md bg-white rounded-xl shadow-lg border border-stone-200 p-8">
+
+    <BackButton></BackButton>
 
     {/* Logo */}
     <div className="text-center mb-8">
