@@ -221,3 +221,85 @@ export default function OrderDetailsPage() {
   );
 }
 
+function Info({label, value}) {
+  return (
+    <div>
+
+      <p className="
+        text-xs
+        uppercase
+        tracking-wide
+        text-gray-500
+      ">
+        {label}
+      </p>
+
+
+      <p className="
+        mt-1
+        font-medium
+        text-gray-900
+        break-all
+      ">
+        {value}
+      </p>
+
+    </div>
+  );
+}
+
+
+
+function StatusBadge({status}) {
+
+  const styles = {
+    PENDING:
+      "bg-orange-50 text-orange-700 border-orange-200",
+
+    CONFIRMED:
+      "bg-blue-50 text-blue-700 border-blue-200",
+
+    SHIPPED:
+      "bg-purple-50 text-purple-700 border-purple-200",
+
+    COMPLETED:
+      "bg-green-50 text-green-700 border-green-200",
+
+    CANCELLED:
+      "bg-red-50 text-red-700 border-red-200",
+  };
+
+
+  return (
+    <span
+      className={`
+        rounded-full
+        border
+        px-4
+        py-2
+        text-sm
+        font-medium
+        ${styles[status] ?? ""}
+      `}
+    >
+      {status}
+    </span>
+  );
+}
+
+
+
+function formatDate(date) {
+
+  return new Date(date).toLocaleString(
+    "en-US",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit",
+    }
+  );
+
+}
