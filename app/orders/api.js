@@ -13,3 +13,8 @@ export const getMyOrders = (userId, page = 0, size = 10) =>
 
 export const getOrderById = (orderId) =>
   apiFetch(`/orders/${orderId}`);
+
+export const cancelOrder = (id) =>
+  apiFetch(`/orders/${id}/cancel`, {
+    method: "PUT",
+  });

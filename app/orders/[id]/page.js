@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import { getOrderById } from "../api";
+import CancelOrderButton from "@/src/features/orders/components/CancelOrderButton";
 
 
 export default function OrderDetailsPage() {
@@ -14,6 +15,8 @@ export default function OrderDetailsPage() {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const normalizedStatus = getNormalizedStatus(order?.status);
 
 
 
@@ -136,7 +139,26 @@ export default function OrderDetailsPage() {
             </div>
 
 
-            <StatusBadge status={order.status}/>
+            <div className="flex items-center gap-2">
+              <StatusBadge status={order.status} />
+
+              {normalizedStatus === "PENDING" && (
+                <CancelOrderButton
+                  orderId={order.id}
+                  onCancelled={(updatedOrder) =>
+                    setOrder((current) =>
+                      current
+                        ? {
+                            ...current,
+                            ...(updatedOrder ?? {}),
+                            status: updatedOrder?.status ?? "CANCELLED",
+                          }
+                        : current
+                    )
+                  }
+                />
+              )}
+            </div>
 
           </div>
 
@@ -279,7 +301,7 @@ function StatusBadge({status}) {
         py-2
         text-sm
         font-medium
-        ${styles[status] ?? ""}
+        ${styles[getNormalizedStatus(status)] ?? ""}
       `}
     >
       {status}
@@ -287,7 +309,9 @@ function StatusBadge({status}) {
   );
 }
 
-
+function getNormalizedStatus(status) {
+  return String(status ?? "").trim().toUpperCase();
+}
 
 function formatDate(date) {
 
