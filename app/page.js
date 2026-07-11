@@ -28,6 +28,29 @@ export default function HomePage() {
     if (e.key === 'Enter') handleSearch();
   };
 
+export default function HomePage() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [featuredItems, setFeaturedItems] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchListings({ limit: 6 });
+      setFeaturedItems(data);
+    };
+    loadData();
+  }, []);
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      router.push(`/listings?query=${encodeURIComponent(searchTerm)}`);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') handleSearch();
+  };
+
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -95,30 +118,11 @@ export default function HomePage() {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredItems.map((item) => (
               <ListingCard key={item.id} listing={item} />
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-white px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-            5,000+ Construction Material <br /> Products in One Solution.
-          </h2>
-          <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-            Decade-long commitment to being your primary guide for comparing construction materials. 
-            We are an impartial team of materials experts: our sole mission is to help you build smart and durable.
-          </p>
-          <div className="flex items-center justify-center gap-6">
-            <button className="px-8 py-3 bg-[#a0522d] text-white rounded-full font-medium hover:bg-[#8b4513] transition-all">
-              View all categories
-            </button>
-            <a href="#" className="text-gray-900 font-medium hover:text-[#a0522d] transition-colors flex items-center gap-1">
-              How it works →
-            </a>
           </div>
         </div>
       </section>
