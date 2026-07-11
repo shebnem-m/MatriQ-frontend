@@ -1,11 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { fetchListings } from '@/src/features/listings/api'; 
+import ListingCard from '@/src/features/listings/components/ListingCard';
 
 export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [featuredItems, setFeaturedItems] = useState([]);
   const router = useRouter();
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchListings({ limit: 3 });
+      setFeaturedItems(data);
+    };
+    loadData();
+  }, []);
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
@@ -18,16 +29,13 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#2a1a14] via-[#5c4033] to-[#c48e77] text-white overflow-hidden relative">
-      {/* Main Content */}
-      <div className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-12 relative">
-        <div className="text-center max-w-4xl">
-          {/* Big Title */}
-          <h1 className="text-[92px] leading-none font-bold tracking-tighter mb-6">
+    <main className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <div className="min-h-screen bg-gradient-to-br from-[#2a1a14] via-[#5c4033] to-[#c48e77] text-white flex flex-col items-center justify-center px-6 relative overflow-hidden">
+        <div className="text-center max-w-4xl z-10">
+          <h1 className="text-[88px] leading-[1.05] font-bold tracking-tighter mb-6">
             search everything
           </h1>
-
-          {/* Subtitle */}
           <p className="text-xl md:text-2xl opacity-90 mb-16 max-w-2xl mx-auto">
             Steel rebar, concrete mix, brick types, timber, insulation, and much more
           </p>
@@ -52,30 +60,48 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Soft Wave Transition */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg 
+            width="100%" 
+            height="220" 
+            viewBox="0 0 1440 220" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            <path 
+              d="M0 220L60 190C120 160 240 120 360 115C480 110 600 145 720 160C840 175 960 165 1080 140C1200 115 1320 65 1380 45L1440 25V220H0Z" 
+              fill="#ffffff" 
+              fillOpacity="0.95"
+            />
+            <path 
+              d="M0 220L70 195C140 170 280 140 410 135C540 130 660 155 780 165C900 175 1020 160 1140 130C1260 100 1350 55 1410 35L1440 25V220H0Z" 
+              fill="#ffffff" 
+              fillOpacity="0.85"
+            />
+          </svg>
+        </div>
       </div>
 
-      {/* White Waves at the Bottom */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg 
-          width="100%" 
-          height="180" 
-          viewBox="0 0 1440 180" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-        >
-          <path 
-            d="M0 180L60 160C120 140 240 100 360 90C480 80 600 100 720 110C840 120 960 120 1080 100C1200 80 1320 40 1380 20L1440 0V180H0Z" 
-            fill="white" 
-            fillOpacity="0.12"
-          />
-          <path 
-            d="M0 180L60 165C120 150 240 120 360 115C480 110 600 130 720 140C840 150 960 145 1080 125C1200 105 1320 65 1380 45L1440 25V180H0Z" 
-            fill="white" 
-            fillOpacity="0.08"
-          />
-        </svg>
-      </div>
+      {/* Featured Materials Section */}
+      <section className="pt-8 pb-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-end justify-between mb-12">
+            <h2 className="text-4xl font-bold text-gray-900">Featured Materials</h2>
+            <a href="/listings" className="text-[#a0522d] hover:underline font-medium flex items-center gap-2">
+              View all materials →
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredItems.map((item) => (
+              <ListingCard key={item.id} listing={item} />
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
