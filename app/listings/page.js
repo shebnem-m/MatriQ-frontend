@@ -1,7 +1,10 @@
-export default function ListingsPage() {
-  return (
-    <div style={{ padding: '40px', fontFamily: 'sans-serif' }}>
-      <h1>Elanlar Səhifəsi Tezliklə Burada Olacaq!</h1>
-    </div>
-  );
+
+import { ListingsPage } from '@/src/features/listings';
+
+export const metadata = {
+  title: 'Browse Materials — MatriQ',
+};
+
+export default function Page() {
+  return <ListingsPage />;
 }

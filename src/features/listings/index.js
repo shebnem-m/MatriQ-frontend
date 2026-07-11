@@ -1,0 +1,1 @@
+export { default as ListingsPage } from './components/ListingsPage';

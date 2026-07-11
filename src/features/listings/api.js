@@ -1,10 +1,12 @@
-import { apiFetch } from '@/lib/apiClient';
+import { apiFetch } from '@/src/lib/apiClient';
 
 export const fetchListings = async (filters = {}) => {
   const queryParams = new URLSearchParams(filters).toString();
-  const path = `/api/listings${queryParams ? `?${queryParams}` : ''}`;
+  const path = `/listings${queryParams ? `?${queryParams}` : ''}`;
   
-  return apiFetch(path, { 
-    method: 'GET' 
+  const data = await apiFetch(path, {
+    method: 'GET'
   });
+
+  return data.content || [];
 };
