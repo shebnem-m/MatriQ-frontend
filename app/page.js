@@ -12,7 +12,7 @@ export default function HomePage() {
 
   useEffect(() => {
     const loadData = async () => {
-      const data = await fetchListings({ limit: 3 });
+      const data = await fetchListings({ limit: 6 });
       setFeaturedItems(data);
     };
     loadData();
@@ -95,7 +95,8 @@ export default function HomePage() {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredItems.map((item) => (
               <ListingCard key={item.id} listing={item} />
             ))}
