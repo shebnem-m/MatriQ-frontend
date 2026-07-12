@@ -5,6 +5,8 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "privoz43.ru",
+        port: "", 
+        pathname: "/upload/**", 
       },
     ],
   },
