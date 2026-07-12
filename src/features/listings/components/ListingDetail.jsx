@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useAuth } from "@/src/context/AuthContext";
+import { ReviewList, AddReviewForm } from '@/src/features/reviews';
 
 export default function ListingDetail({ listing }) {
+  const { user } = useAuth();
   if (!listing) return null;
 
   return (
@@ -45,6 +49,21 @@ export default function ListingDetail({ listing }) {
               </div>
               {/* Add more thumbnails when you have multiple images */}
             </div>
+            <div className="bg-white p-8 rounded-3xl shadow-md border border-[#F0E9DB]">
+               <h2 className="text-2xl font-semibold text-[#3A2B20] mb-6">Customer Reviews</h2>
+               
+               <ReviewList listingId={listing.id} />
+               
+               <div className="mt-8 pt-8 border-t border-[#F0E9DB]">
+                 {user ? (
+                   <AddReviewForm listingId={listing.id} />
+                 ) : (
+                   <div className="bg-[#F8F5F1] p-4 rounded-xl text-center text-gray-600">
+                     Please log in to add your review.
+                   </div>
+                 )}
+               </div>
+             </div>
           </div>
 
           {/* Right Column - Info & CTA */}
