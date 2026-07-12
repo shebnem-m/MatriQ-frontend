@@ -1,4 +1,3 @@
-// src/features/reviews/components/ReviewItem.jsx
 export default function ReviewItem({ review }) {
   return (
     <div className="border-b border-gray-100 py-6">

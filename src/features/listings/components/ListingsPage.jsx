@@ -8,7 +8,6 @@ import { useSearchParams } from "next/navigation";
 export default function ListingsPage() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
-//const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("price-low");
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(15000);
@@ -17,7 +16,6 @@ export default function ListingsPage() {
   const initialQuery = searchParams.get("query") || "";
   const [searchQuery, setSearchQuery] = useState(initialQuery);
 
-  // Backend-dən gələn dataya uyğun düzgün kateqoriyalar
   const categories = ["metal", "polymer", "timber"];
   
   const sortOptions = [
@@ -48,7 +46,6 @@ export default function ListingsPage() {
 
     const data = await fetchListings(filters);
 
-    // fetchListings artıq array qaytarır
     setListings(Array.isArray(data) ? data : []);
   } catch (error) {
     console.error("Failed to fetch listings:", error);

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchReviewsByListing } from "../api"; // services/reviewService əvəzinə api.js-dən import edirik
+import { fetchReviewsByListing } from "../api"; 
 import ReviewItem from "./ReviewItem";
 
 export default function ReviewList({ listingId }) {
@@ -11,8 +11,6 @@ export default function ReviewList({ listingId }) {
     const loadReviews = async () => {
       try {
         const data = await fetchReviewsByListing(listingId);
-        // Əgər API cavabı birbaşa array deyilsə, bəlkə data.content-dədir? 
-        // Aşağıdakı yoxlama bunu həll edir:
         setReviews(Array.isArray(data) ? data : (data?.content || []));
       } catch (error) {
         console.error("Rəyləri çəkərkən xəta baş verdi:", error);

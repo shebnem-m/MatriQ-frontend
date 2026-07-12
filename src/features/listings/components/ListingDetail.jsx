@@ -12,7 +12,6 @@ export default function ListingDetail({ listing }) {
     <section className="bg-[#F8F5F1] min-h-screen pb-12">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 pt-8">
         
-        {/* Breadcrumb */}
         <div className="flex items-center text-sm text-gray-500 mb-8">
           <Link href="/" className="hover:text-[#B57947] transition">
     Home
@@ -25,10 +24,8 @@ export default function ListingDetail({ listing }) {
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
           
-          {/* Left Column - Image + Reviews */}
           <div className="lg:col-span-7 space-y-8">
             
-            {/* Main Image */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-white aspect-[4/3] sm:aspect-square group">
               <Image
                 src={listing.imageUrl}
@@ -40,7 +37,6 @@ export default function ListingDetail({ listing }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
             </div>
 
-            {/* Thumbnails */}
             <div className="flex gap-3 sm:gap-4">
               <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-[#B57947] ring-1 ring-offset-2 ring-[#B57947]/30 cursor-pointer flex-shrink-0">
                 <Image
@@ -51,10 +47,8 @@ export default function ListingDetail({ listing }) {
                   className="object-cover w-full h-full"
                 />
               </div>
-              {/* Daha çox thumbnail əlavə etmək üçün yer */}
             </div>
 
-            {/* Reviews Section - Daha kompakt */}
             <div className="bg-white rounded-3xl shadow-md p-6 sm:p-8 border border-[#F0E9DB]">
               <h2 className="text-2xl font-semibold text-[#3A2B20] mb-6">Customer Reviews</h2>
               
@@ -72,10 +66,8 @@ export default function ListingDetail({ listing }) {
             </div>
           </div>
 
-          {/* Right Column - Info & CTA */}
           <div className="lg:col-span-5 space-y-7 lg:sticky lg:top-8 lg:self-start">
             
-            {/* Title & Price */}
             <div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#3A2B20] leading-tight">
                 {listing.title}
@@ -89,7 +81,6 @@ export default function ListingDetail({ listing }) {
               </div>
             </div>
 
-            {/* Quick Info */}
             <div className="flex flex-wrap gap-3">
               <div className="bg-white px-5 py-3 rounded-2xl text-sm font-medium border border-[#EDE4D5] flex items-center gap-2 shadow-sm">
                 <span className="text-[#B57947]">📦</span>
@@ -101,7 +92,6 @@ export default function ListingDetail({ listing }) {
               </div>
             </div>
 
-            {/* Description */}
             <div className="bg-white rounded-3xl shadow-md p-6 sm:p-8 border border-[#F0E9DB]">
               <h2 className="text-xl sm:text-2xl font-semibold text-[#3A2B20] mb-5">Description</h2>
               <p className="text-gray-600 leading-relaxed text-[16px] sm:text-[17px]">
@@ -109,7 +99,6 @@ export default function ListingDetail({ listing }) {
               </p>
             </div>
 
-            {/* Product Information */}
             <div className="bg-white rounded-3xl shadow-md p-6 sm:p-8 border border-[#F0E9DB]">
               <h2 className="text-xl sm:text-2xl font-semibold text-[#3A2B20] mb-6">Product Information</h2>
               
@@ -133,7 +122,6 @@ export default function ListingDetail({ listing }) {
               </div>
             </div>
 
-            {/* Buy Now Card - Sticky on large screens */}
             <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 border border-[#F0E9DB] lg:sticky lg:top-8">
               <div className="flex justify-between items-end mb-8">
                 <div>

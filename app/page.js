@@ -33,7 +33,6 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Hero Section */}
       <div className="min-h-screen bg-gradient-to-br from-[#2a1a14] via-[#5c4033] to-[#c48e77] text-white flex flex-col items-center justify-center px-6 relative overflow-hidden">
         <div className="text-center max-w-4xl z-10">
           <h1 className="text-[88px] leading-[1.05] font-bold tracking-tighter mb-6">
@@ -88,7 +87,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Featured Materials */}
       <section className="pt-8 pb-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-12">

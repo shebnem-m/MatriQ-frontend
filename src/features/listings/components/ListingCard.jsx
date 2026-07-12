@@ -19,7 +19,6 @@ export default function ListingCard({ listing }) {
         duration-300
       "
     >
-      {/* IMAGE */}
       <div className="relative h-56 overflow-hidden bg-gray-100">
         <Image
           src={listing.imageUrl}
@@ -49,7 +48,6 @@ export default function ListingCard({ listing }) {
         </span>
       </div>
 
-      {/* CONTENT */}
       <div className="p-5">
         <h2 className="text-xl font-bold text-gray-900 line-clamp-1">
           {listing.title}

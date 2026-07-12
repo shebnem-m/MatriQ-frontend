@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { addReview } from "../api"; // services/reviewService əvəzinə birbaşa api.js-dən import edirik
-
+import { addReview } from "../api";
 export default function AddReviewForm({ listingId, onReviewAdded }) {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
@@ -12,11 +11,10 @@ export default function AddReviewForm({ listingId, onReviewAdded }) {
     setIsSubmitting(true);
     
     try {
-      // listingId və data-nı göndəririk
       await addReview(listingId, { rating: Number(rating), comment });
       setComment("");
       setRating(5);
-      if (onReviewAdded) onReviewAdded(); // Rəy əlavə olunandan sonra siyahını yeniləmək üçün
+      if (onReviewAdded) onReviewAdded(); 
     } catch (error) {
       console.error(error);
       alert("Rəy əlavə edilərkən xəta baş verdi!");
@@ -29,7 +27,6 @@ export default function AddReviewForm({ listingId, onReviewAdded }) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <h3 className="text-lg font-semibold text-[#3A2B20]">Write a Review</h3>
       
-      {/* Rating seçimi */}
       <div>
         <label className="block text-sm text-gray-600 mb-1">Rating (1-5)</label>
         <select 
@@ -41,7 +38,6 @@ export default function AddReviewForm({ listingId, onReviewAdded }) {
         </select>
       </div>
 
-      {/* Şərh sahəsi */}
       <div>
         <textarea 
           required
