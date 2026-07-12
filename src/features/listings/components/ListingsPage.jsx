@@ -3,15 +3,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { fetchListings } from "@/src/features/listings/api";
 import ListingCard from "@/src/features/listings/components/ListingCard";
+import { useSearchParams } from "next/navigation";
 
 export default function ListingsPage() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+//const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("price-low");
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(15000);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("query") || "";
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
 
   // Backend-dən gələn dataya uyğun düzgün kateqoriyalar
   const categories = ["metal", "polymer", "timber"];
