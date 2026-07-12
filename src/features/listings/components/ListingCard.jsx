@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ListingCard({ listing }) {
   return (
+    <Link href={`/listings/${listing.id}`} className="block transition-transform hover:-translate-y-2">
     <div
       className="
         group
@@ -108,5 +110,6 @@ export default function ListingCard({ listing }) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }
