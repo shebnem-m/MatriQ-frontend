@@ -27,6 +27,14 @@ export const fetchSuppliers = async () => {
   }
 };
 
-export const fetchSupplierById = async (id) => {};
+export const fetchSupplierById = async (id) => {
+  try {
+    const backendSupplier = await apiFetch(`/suppliers/${id}`);
+    return mapSupplierData(backendSupplier);
+  } catch (error) {
+    console.error(`Failed to fetch supplier ${id}:`, error);
+    return null;
+  }
+};
 
 export const updateSupplierStatus = async (id, status) => {};
