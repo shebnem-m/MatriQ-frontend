@@ -30,9 +30,9 @@ export default function Footer() {
           <div>
             <span className="block font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-4">Company</span>
             <ul className="space-y-3 text-sm font-body text-ink/70">
-              <li><Link href="/about" className="hover:text-ink transition-colors">About Us</Link></li>
-              <li><Link href="/careers" className="hover:text-ink transition-colors">Careers</Link></li>
-              <li><Link href="/contact" className="hover:text-ink transition-colors">Contact</Link></li>
+              <li><Link href="/info#about" className="hover:text-ink transition-colors">About Us</Link></li>
+              <li><Link href="/info#careers" className="hover:text-ink transition-colors">Careers</Link></li>
+              <li><Link href="/info#contact" className="hover:text-ink transition-colors">Contact</Link></li>
             </ul>
           </div>
 
