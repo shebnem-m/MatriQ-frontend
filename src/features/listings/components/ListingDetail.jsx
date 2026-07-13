@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useAuth } from "@/src/context/AuthContext";
 import { ReviewList, AddReviewForm } from '@/src/features/reviews';
 import Link from "next/link";
+import BuyButton from "@/src/features/listings/components/BuyButton";
 
 export default function ListingDetail({ listing }) {
   const { user } = useAuth();
@@ -133,10 +134,7 @@ export default function ListingDetail({ listing }) {
                 </div>
               </div>
 
-              <button className="w-full bg-[#B57947] hover:bg-[#A46E43] active:bg-[#8C5D37] text-white font-semibold py-4 sm:py-5 rounded-2xl text-lg transition-all duration-300 shadow-lg hover:shadow-2xl flex items-center justify-center gap-2">
-                Buy Now
-                <span>→</span>
-              </button>
+              <BuyButton listingId={listing.id} />
 
               <p className="text-center text-gray-500 text-xs sm:text-sm mt-6">
                 Təhlükəsiz ödəniş • Dərhal sifariş təsdiqi
