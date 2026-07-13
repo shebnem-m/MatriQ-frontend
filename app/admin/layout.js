@@ -7,7 +7,7 @@ export default function AdminLayout({ children }) {
       <Sidebar />
       
       {/* Main Content Area where nested page.js contents will render */}
-      <main className="flex-1 p-6 bg-gray-50">
+      <main className="flex-1 p-6 bg-paper2">
         {children}
       </main>
     </div>
