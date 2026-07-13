@@ -15,6 +15,7 @@ export async function apiFetch(path, options = {}) {
   const res = await fetch(`${BASE_URL}${path}`, {
     ...options,
     headers,
+    credentials: "include",
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
 
