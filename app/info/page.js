@@ -71,6 +71,53 @@ export default function InfoPage() {
             </div>
           </section>
 
+          {/* Legal: Terms of Service */}
+          <section id="terms" className="scroll-mt-32">
+            <h2 className="font-display font-600 text-2xl text-ink mb-6 pb-4 border-b border-ink/10">
+              Terms of Service
+            </h2>
+            <div className="prose prose-stone max-w-none text-ink/80 font-body space-y-4">
+              <p>
+                By accessing and using the MatriQ platform, you accept and agree to be bound by the terms and provision of this agreement. Any participation in this service will constitute acceptance of this agreement.
+              </p>
+              <p>
+                We reserve the right to modify these terms from time to time at our sole discretion. Therefore, you should review these page periodically. When we change the Terms in a material manner, we will notify you that material changes have been made to these Terms.
+              </p>
+            </div>
+          </section>
+
+          {/* Legal: Privacy Policy */}
+          <section id="privacy" className="scroll-mt-32">
+            <h2 className="font-display font-600 text-2xl text-ink mb-6 pb-4 border-b border-ink/10">
+              Privacy Policy
+            </h2>
+            <div className="prose prose-stone max-w-none text-ink/80 font-body space-y-4">
+              <p>
+                Your privacy is critically important to us. At MatriQ, we have a few fundamental principles:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>We are thoughtful about the personal information we ask you to provide and the personal information that we collect about you through the operation of our services.</li>
+                <li>We store personal information for only as long as we have a reason to keep it.</li>
+                <li>We aim for full transparency on how we gather, use, and share your personal information.</li>
+              </ul>
+            </div>
+          </section>
+
+          {/* Legal: Verification Guidelines */}
+          <section id="guidelines" className="scroll-mt-32">
+            <h2 className="font-display font-600 text-2xl text-ink mb-6 pb-4 border-b border-ink/10">
+              Verification Guidelines
+            </h2>
+            <div className="prose prose-stone max-w-none text-ink/80 font-body space-y-4">
+              <p>
+                To maintain the integrity of our marketplace, all suppliers and materials undergo a strict verification process. This includes verifying business licenses, material certifications, and conducting regular audits of manufacturing processes.
+              </p>
+              <p>
+                Suppliers found violating these guidelines may be subject to account suspension or permanent removal from the MatriQ platform.
+              </p>
+            </div>
+          </section>
+
         </div>
       </div>
     </div>
