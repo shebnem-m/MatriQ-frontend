@@ -8,7 +8,7 @@ export default function ListingsPage() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState("price-low");
+  const [sortBy, setSortBy] = useState("price,asc");
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(15000);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -17,9 +17,9 @@ export default function ListingsPage() {
   const categories = ["metal", "polymer", "timber"];
   
   const sortOptions = [
-    { value: "price-low", label: "Price: Low to High" },
-    { value: "price-high", label: "Price: High to Low" },
-    { value: "newest", label: "Newest First" }
+    { value: "price,asc", label: "Price: Low to High" },
+    { value: "price,desc", label: "Price: High to Low" },
+    { value: "id,desc", label: "Newest First" }
   ];
 
   const loadListings = useCallback(async () => {
