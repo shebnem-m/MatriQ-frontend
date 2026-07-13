@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ListingCard({ listing }) {
   return (
+    <Link href={`/listings/${listing.id}`} className="block transition-transform hover:-translate-y-2">
     <div
       className="
         group
@@ -17,7 +19,6 @@ export default function ListingCard({ listing }) {
         duration-300
       "
     >
-      {/* IMAGE */}
       <div className="relative h-56 overflow-hidden bg-gray-100">
         <Image
           src={listing.imageUrl}
@@ -47,7 +48,6 @@ export default function ListingCard({ listing }) {
         </span>
       </div>
 
-      {/* CONTENT */}
       <div className="p-5">
         <h2 className="text-xl font-bold text-gray-900 line-clamp-1">
           {listing.title}
@@ -108,5 +108,6 @@ export default function ListingCard({ listing }) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }
