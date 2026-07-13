@@ -15,7 +15,17 @@ const mapSupplierData = (backendSupplier) => ({
   status: SupplierStatus.PENDING, 
 });
 
-export const fetchSuppliers = async () => {};
+export const fetchSuppliers = async () => {
+  try {
+    // Spring Boot paginated response places the array in 'content'
+    const data = await apiFetch('/suppliers');
+    const suppliersArray = data?.content || [];
+    return suppliersArray.map(mapSupplierData);
+  } catch (error) {
+    console.error("Failed to fetch suppliers:", error);
+    return []; // Return empty array on error so UI doesn't crash
+  }
+};
 
 export const fetchSupplierById = async (id) => {};
 
