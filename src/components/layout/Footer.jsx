@@ -39,9 +39,9 @@ export default function Footer() {
           <div>
             <span className="block font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-4">Legal</span>
             <ul className="space-y-3 text-sm font-body text-ink/70">
-              <li><Link href="/terms" className="hover:text-ink transition-colors">Terms of Service</Link></li>
-              <li><Link href="/privacy" className="hover:text-ink transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/guidelines" className="hover:text-ink transition-colors">Verification Guidelines</Link></li>
+              <li><Link href="/info#terms" className="hover:text-ink transition-colors">Terms of Service</Link></li>
+              <li><Link href="/info#privacy" className="hover:text-ink transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/info#guidelines" className="hover:text-ink transition-colors">Verification Guidelines</Link></li>
             </ul>
           </div>
         </div>
