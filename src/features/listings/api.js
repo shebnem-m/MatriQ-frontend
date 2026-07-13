@@ -36,3 +36,19 @@ export const createOrder = async (orderData) => {
     body: orderData,
   });
 };
+}; 
+
+export const deleteListing = async (id) => {
+  return await apiFetch(`/listings/${id}`, {
+    method: 'DELETE',
+  });
+
+  
+};
+
+export const updateListing = async (id, listingData) => {
+  return await apiFetch(`/listings/${id}`, {
+    method: 'PUT', // və ya PATCH
+    body: JSON.stringify(listingData),
+  });
+};

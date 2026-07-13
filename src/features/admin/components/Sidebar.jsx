@@ -25,7 +25,7 @@ export default function Sidebar() {
       <div className="fixed top-4 left-4 z-50 md:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="rounded-lg bg-neutral-950 p-2 text-white shadow-md hover:bg-neutral-800 focus:outline-none"
+          className="rounded-sm bg-ink p-2 text-chalk shadow-md hover:bg-ink/80 focus:outline-none"
         >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
@@ -41,24 +41,23 @@ export default function Sidebar() {
 
       {/* --- SIDEBAR CONTAINER --- */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex h-screen w-64 flex-col bg-neutral-950 text-neutral-300 transition-transform duration-300 ease-in-out 
+        className={`fixed inset-y-0 left-0 z-40 flex h-screen w-64 flex-col bg-ink text-paper/80 transition-transform duration-300 ease-in-out 
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           md:static md:translate-x-0`}
       >
-        {/* Logo */}
         {/* Logo */}
         <div className="flex items-center px-6 py-6 pl-16 md:pl-6">
           <Link 
             href="/admin" 
             onClick={() => setIsOpen(false)} // Closes the mobile drawer when clicked
-            className="group text-2xl font-extrabold tracking-tight text-white transition-opacity hover:opacity-90"
+            className="group font-display text-2xl font-bold tracking-tight text-chalk transition-opacity hover:opacity-90"
           >
-            Matri<span className="text-orange-500 transition-colors group-hover:text-orange-400">Q</span>
+            Matri<span className="text-rust transition-colors group-hover:text-rust/80">Q</span>
           </Link>
         </div>
 
         {/* Nav Links */}
-        <nav className="flex-1 space-y-1 px-3 overflow-y-auto">
+        <nav className="flex-1 space-y-1 px-3 overflow-y-auto font-body">
           {navItems.map(({ label, href, icon: Icon }) => {
             const isActive =
               pathname === href || pathname.startsWith(`${href}/`);
@@ -68,10 +67,10 @@ export default function Sidebar() {
                 key={href}
                 href={href}
                 onClick={() => setIsOpen(false)} // Close drawer on mobile click
-                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm font-medium transition-colors ${
                   isActive
-                    ? "bg-orange-500 text-white"
-                    : "text-neutral-300 hover:bg-neutral-800 hover:text-white"
+                    ? "bg-rust text-chalk"
+                    : "text-paper/80 hover:bg-paper/10 hover:text-chalk"
                 }`}
               >
                 <Icon className="h-5 w-5 shrink-0" />
@@ -82,7 +81,7 @@ export default function Sidebar() {
         </nav>
 
         {/* Logout */}
-        <div className="border-t border-neutral-800 px-3 py-4">
+        <div className="border-t border-paper/10 px-3 py-4 font-body">
           <LogoutButton />
         </div>
       </aside>
