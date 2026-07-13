@@ -15,6 +15,7 @@ export const fetchListings = async (filters = {}) => {
   });
 
   return data.content || data || [];
+};
 }; 
 
 export const deleteListing = async (id) => {
