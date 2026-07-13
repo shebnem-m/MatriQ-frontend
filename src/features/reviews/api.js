@@ -12,3 +12,15 @@ export const addReview = async (listingId, reviewData) => {
     body: JSON.stringify(reviewData),
   });
 };
+
+export const getAllReviews = async () => {
+  return await apiFetch("/reviews", {
+    method: 'GET'
+  });
+};
+
+export const deleteReview = async (id) => {
+  return await apiFetch(`/reviews/${id}`, {
+    method: 'DELETE',
+  });
+};
