@@ -1,34 +1,12 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { createOrder } from "../api";
-
-export default function BuyButton({ listingId }) {
-  const router = useRouter();
-
-  const handleBuy = async () => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
-
-    if (!token) {
-      router.push("/login");
-      return;
-    }
-
-    try {
-      await createOrder({ listingId });
-      router.push("/orders");
-    } catch (error) {
-      console.error("Sifariş xətası:", error);
-      alert("Sifariş zamanı xəta baş verdi.");
-    }
-  };
-
+export default function BuyButton({ listingId, quantity, onBuy, isLoading }) {
   return (
-    <button 
-      onClick={handleBuy}
-      className="w-full bg-[#B57947] hover:bg-[#A46E43] active:bg-[#8C5D37] text-white font-semibold py-4 sm:py-5 rounded-2xl text-lg transition-all duration-300 shadow-lg hover:shadow-2xl flex items-center justify-center gap-2"
+    <button
+      onClick={onBuy}
+      disabled={isLoading}
+      className={`w-full py-4 rounded-2xl text-white font-bold transition-all shadow-lg 
+        ${isLoading ? 'bg-rust/70 cursor-not-allowed' : 'bg-rust hover:bg-rust/90 hover:shadow-xl'}`}
     >
-      Buy Now
-      <span>→</span>
+      {isLoading ? "Processing..." : `Buy Now (${quantity})`}
     </button>
   );
 }
