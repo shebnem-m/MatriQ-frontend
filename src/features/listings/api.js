@@ -15,7 +15,7 @@ export const fetchListings = async (filters = {}) => {
   });
 
   return data.content || data || [];
-}; 
+};
 
 export const deleteListing = async (id) => {
   return await apiFetch(`/listings/${id}`, {
@@ -34,21 +34,5 @@ export const createOrder = async (orderData) => {
   return await apiFetch("/orders", {
     method: "POST",
     body: orderData,
-  });
-};
-}; 
-
-export const deleteListing = async (id) => {
-  return await apiFetch(`/listings/${id}`, {
-    method: 'DELETE',
-  });
-
-  
-};
-
-export const updateListing = async (id, listingData) => {
-  return await apiFetch(`/listings/${id}`, {
-    method: 'PUT', // və ya PATCH
-    body: JSON.stringify(listingData),
   });
 };
