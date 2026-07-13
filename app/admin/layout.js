@@ -5,9 +5,9 @@ export default function AdminLayout({ children }) {
     <div className="flex min-h-screen">
       {/* Persistent Sidebar */}
       <Sidebar />
-
+      
       {/* Main Content Area */}
-      <main className="flex-1 p-4 sm:p-6 pt-20 lg:pt-6 bg-gray-50">
+      <main className="flex-1 p-4 sm:p-6 pt-20 lg:pt-6 bg-paper2">
         {children}
       </main>
     </div>
