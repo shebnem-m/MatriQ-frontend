@@ -1,5 +1,5 @@
 import { SupplierStatus, SupplierCategories } from './types';
-import { apiFetch } from '@/lib/apiClient';
+import { apiFetch } from '../../lib/apiClient';
 
 // Maps backend Spring Boot DTO to our Frontend component needs
 const mapSupplierData = (backendSupplier) => ({
