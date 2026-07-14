@@ -1,14 +1,51 @@
 "use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { useAuth } from "@/src/context/AuthContext";
 import { ReviewList, AddReviewForm } from '@/src/features/reviews';
-import Link from "next/link";
 import BuyButton from "@/src/features/listings/components/BuyButton";
+import { createOrder } from "../api";
 
 export default function ListingDetail({ listing }) {
-  const { user } = useAuth();
+  
+ const { user } = useAuth();
+  const router = useRouter();
+  
+  const [quantity, setQuantity] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   if (!listing) return null;
 
+  const totalPrice = listing.price * quantity;
+
+  const handleBuy = async () => {
+  if (!user || !user.id) { // user.id-nin olub olmadığını yoxlayın
+    router.push("/login");
+    return;
+  }
+
+  setIsLoading(true);
+  try {
+    // bura user.id-ni əlavə edin
+    await createOrder({ 
+      listingId: listing.id, 
+      quantity: quantity, 
+      buyerId: user.id 
+    });
+    router.push("/orders");
+  } catch (error) {
+      console.error("Sifariş xətası:", error); // Xətanı konsolda ətraflı görün
+      
+      if (error.status === 401) {
+        router.push("/login");
+      } else {
+        alert(error.message || "Sifariş zamanı xəta baş verdi.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <section className="bg-[#F8F5F1] min-h-screen pb-12">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 pt-8">
@@ -123,23 +160,80 @@ export default function ListingDetail({ listing }) {
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 border border-[#F0E9DB] lg:sticky lg:top-8">
-              <div className="flex justify-between items-end mb-8">
-                <div>
-                  <p className="text-sm text-gray-500">Total</p>
-                  <p className="text-4xl font-bold text-[#B57947]">AZN {listing.price.toFixed(2)}</p>
-                </div>
-                <div className="text-emerald-600 text-sm font-medium flex items-center gap-1">
-                  ✓ In stock
-                </div>
-              </div>
+           <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 border border-[#F0E9DB] lg:sticky lg:top-8">
+  <div className="flex justify-between items-end mb-8">
+  <div>
+    <p className="text-sm text-gray-500">Total</p>
+    <p className="text-4xl font-bold text-rust">
+      AZN {totalPrice.toFixed(2)}
+    </p>
+  </div>
+</div>
 
-              <BuyButton listingId={listing.id} />
+ {/* Quantity İdarəetmə Paneli */}
+<div className="grid grid-cols-3 gap-3 mb-6">
+  {/* 1. Manuel Input */}
+  <div className="col-span-3">
+    <label className="text-xs text-gray-500 mb-1 block uppercase font-bold tracking-wider">Custom Qty</label>
+    <input
+      type="number"
+      min="1"
+      value={quantity}
+      onChange={(e) => {
+        const val = e.target.value;
+        setQuantity(val === "" ? "" : Math.max(1, parseInt(val)));
+      }}
+      onBlur={(e) => {
+        if (e.target.value === "" || parseInt(e.target.value) < 1) {
+          setQuantity(1);
+        }
+      }}
+      // Fokus effekti üçün ring-rust istifadə edirik
+      className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-rust focus:outline-none transition-all"
+    />
+  </div>
 
-              <p className="text-center text-gray-500 text-xs sm:text-sm mt-6">
-                Təhlükəsiz ödəniş • Dərhal sifariş təsdiqi
-              </p>
-            </div>
+  {/* 2. Preset 100 */}
+  <button 
+    onClick={() => setQuantity(100)}
+    // Seçili olanda bg-rust, deyilsə hover edəndə də uyğun görünüş
+    className={`p-3 rounded-xl border font-semibold transition-all ${
+      quantity === 100 
+        ? 'bg-rust text-white border-rust' 
+        : 'bg-gray-50 hover:border-rust/50 border-gray-200'
+    }`}
+  >
+    100
+  </button>
+
+  {/* 3. Preset 500 */}
+  <button 
+    onClick={() => setQuantity(500)}
+    className={`p-3 rounded-xl border font-semibold transition-all ${
+      quantity === 500 
+        ? 'bg-rust text-white border-rust' 
+        : 'bg-gray-50 hover:border-rust/50 border-gray-200'
+    }`}
+  >
+    500
+  </button>
+  
+  {/* Reset düyməsi */}
+  <button 
+    onClick={() => setQuantity(1)}
+    className="p-3 rounded-xl border border-gray-200 hover:border-rust/50 hover:text-rust transition-all text-gray-500"
+  >
+    Reset
+  </button>
+</div>
+<BuyButton 
+  listingId={listing.id} 
+  quantity={quantity} 
+  onBuy={handleBuy} 
+  isLoading={isLoading} 
+/>
+ 
+</div>
           </div>
         </div>
       </div>
