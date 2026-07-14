@@ -10,41 +10,40 @@ export default function AddReviewForm({ listingId, onReviewAdded }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!comment.trim()) {
-      alert("Rəy yazmalısınız!");
-      return;
-    }
+  if (!comment.trim()) {
+    alert("Rəy yazmalısınız!");
+    return;
+  }
 
-    if (!user?.id) {
-      alert("Rəy yazmaq üçün daxil olmalısınız!");
-      return;
-    }
+  if (!user?.id) {
+    alert("Rəy yazmaq üçün daxil olmalısınız!");
+    return;
+  }
 
-    setIsSubmitting(true);
+  setIsSubmitting(true);
 
-    try {
-     await addReview(listingId, {
-  rating: Number(rating),
-  comment: comment.trim(),
-//   userId: user.id,
-});
+  try {
+    await addReview(listingId, {
+      ownerId: user.id,
+      rating: Number(rating),
+      comment: comment.trim(),
+    });
 
-      alert("Rəyiniz uğurla əlavə edildi! 🎉");
-      setComment("");
-      setRating(5);
-      if (onReviewAdded) onReviewAdded();
+    alert("Rəyiniz uğurla əlavə edildi! 🎉");
+    setComment("");
+    setRating(5);
+    if (onReviewAdded) onReviewAdded();
 
-    }  catch (error) {
-  console.error("Full Review Error:", error);
-  alert(error.message || "Rəy göndərilərkən xəta baş verdi!");
+  } catch (error) {
+    console.error("Full Review Error:", error);
+    alert(error.message || "Rəy göndərilərkən xəta baş verdi!");
 
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <h3 className="text-lg font-semibold text-[#3A2B20]">Write a Review</h3>
