@@ -23,17 +23,41 @@ export const deleteListing = async (id) => {
   });
 };
 
-export const updateListing = async (id, listingData) => {
+export const updateListing = async (id, listingData, file = null) => {
+  const formData = new FormData();
+  
+  formData.append(
+    "listing", 
+    new Blob([JSON.stringify(listingData)], { type: "application/json" })
+  );
+  
+  if (file) {
+    formData.append("file", file);
+  }
+
   return await apiFetch(`/listings/${id}`, {
     method: 'PUT',
-    body: listingData, 
+    body: formData, 
   });
 };
 
-// Əgər backend @RequestParam gözləyirsə, ID-ni URL-ə əlavə edin
+export const createListing = async (listingData, file) => {
+  const formData = new FormData();
+  formData.append(
+    "listing",
+    new Blob([JSON.stringify(listingData)], { type: "application/json" })
+  );
+  if (file) {
+    formData.append("file", file);
+  }
+
+  return await apiFetch(`/listings`, {
+    method: "POST",
+    body: formData,
+  });
+};
+
 export const createOrder = async (orderData) => {
-  // orderData içindən listingId və quantity-ni götürürük
-  // buyerId-ni isə URL-ə əlavə edirik (backend-dən necə tələb olunduğuna baxın)
   return await apiFetch(`/orders?buyerId=${orderData.buyerId}`, {
     method: "POST",
     body: { listingId: orderData.listingId, quantity: orderData.quantity },
