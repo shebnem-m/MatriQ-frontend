@@ -2,11 +2,23 @@ import React, { useState } from 'react';
 
 export default function SupplierVerificationTable({ suppliers, onAddSupplier, onDeleteSupplier }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
   const itemsPerPage = 5;
 
-  const totalPages = Math.max(1, Math.ceil(suppliers.length / itemsPerPage));
+  const filteredSuppliers = suppliers.filter((supplier) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      supplier.name?.toLowerCase().includes(query) ||
+      supplier.email?.toLowerCase().includes(query) ||
+      supplier.categories?.[0]?.toLowerCase().includes(query) ||
+      supplier.location?.toLowerCase().includes(query)
+    );
+  });
+
+  const totalPages = Math.max(1, Math.ceil(filteredSuppliers.length / itemsPerPage));
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentSuppliers = suppliers.slice(startIndex, startIndex + itemsPerPage);
+  const currentSuppliers = filteredSuppliers.slice(startIndex, startIndex + itemsPerPage);
 
   // Use dates from mock data or formatted specifically
   const formatDate = (dateStr) => {
@@ -39,17 +51,13 @@ export default function SupplierVerificationTable({ suppliers, onAddSupplier, on
           <input 
             type="text" 
             placeholder="Search suppliers..." 
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
             className="w-full pl-9 pr-4 py-2 bg-paper border border-ink/10 rounded-sm text-sm focus:outline-none focus:border-rust"
           />
-        </div>
-        <div className="flex gap-3">
-          <select className="px-4 py-2 bg-paper border border-ink/10 rounded-sm text-sm focus:outline-none cursor-pointer">
-            <option>All Categories</option>
-          </select>
-          <button className="flex items-center gap-2 px-4 py-2 bg-paper border border-ink/10 rounded-sm text-sm hover:bg-ink/5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            All Time
-          </button>
         </div>
       </div>
 
@@ -108,7 +116,7 @@ export default function SupplierVerificationTable({ suppliers, onAddSupplier, on
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
         <p className="text-sm text-ink/60">
-          Showing {Math.min(startIndex + 1, suppliers.length)} to {Math.min(startIndex + itemsPerPage, suppliers.length)} of {suppliers.length} applications
+          Showing {filteredSuppliers.length > 0 ? Math.min(startIndex + 1, filteredSuppliers.length) : 0} to {Math.min(startIndex + itemsPerPage, filteredSuppliers.length)} of {filteredSuppliers.length} applications
         </p>
         <div className="flex gap-2">
           <button 
