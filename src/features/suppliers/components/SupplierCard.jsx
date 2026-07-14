@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function SupplierCard({ supplier }) {
   const isVerified = supplier.status === 'Approved';
@@ -37,9 +38,9 @@ export default function SupplierCard({ supplier }) {
           </p>
         </div>
 
-        <button className="w-full py-2 border border-ink/25 text-ink/80 font-medium text-sm rounded-sm hover:bg-ink/5 transition-colors">
+        <Link href={`/suppliers/${supplier.id}`} className="block text-center w-full py-2 border border-ink/25 text-ink/80 font-medium text-sm rounded-sm hover:bg-ink/5 transition-colors">
           View Profile
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -1,7 +1,14 @@
+"use client";
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // Admin pages render their own footer inside the dashboard area
+  if (pathname?.startsWith('/admin')) return null;
+
   return (
     <footer className="border-t border-ink/10 mt-auto bg-paper">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12 md:py-16">

@@ -64,27 +64,22 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            width="100%"
-            height="220"
-            viewBox="0 0 1440 220"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0 220L60 190C120 160 240 120 360 115C480 110 600 145 720 160C840 175 960 165 1080 140C1200 115 1320 65 1380 45L1440 25V220H0Z"
-              fill="#ffffff"
-              fillOpacity="0.95"
-            />
-            <path
-              d="M0 220L70 195C140 170 280 140 410 135C540 130 660 155 780 165C900 175 1020 160 1140 130C1260 100 1350 55 1410 35L1440 25V220H0Z"
-              fill="#ffffff"
-              fillOpacity="0.85"
-            />
-          </svg>
-        </div>
+       <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+  <svg
+    width="100%"
+    viewBox="0 0 1440 220"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+    className="h-[120px] md:h-[220px]" // Bura baxın: hündürlüyü buraya köçürdük
+  >
+    <path 
+      d="M0 220L60 190C120 160 240 120 360 115C480 110 600 145 720 160C840 175 960 165 1080 140C1200 115 1320 65 1380 45L1440 25V220H0Z" 
+      fill="#ffffff" 
+      fillOpacity="0.95" 
+    />
+  </svg>
+</div>
       </div>
 
       <section className="pt-8 pb-20 bg-white">
@@ -119,14 +114,20 @@ export default function HomePage() {
             Decade-long commitment to being your primary guide for comparing construction materials. 
             We are an impartial team of materials experts: our sole mission is to help you build smart and durable.
           </p>
-          <div className="flex items-center justify-center gap-6">
-            <button className="px-8 py-3 bg-[#a0522d] text-white rounded-full font-medium hover:bg-[#8b4513] transition-all">
-              View all categories
-            </button>
-            <a href="#" className="text-gray-900 font-medium hover:text-[#a0522d] transition-colors flex items-center gap-1">
-              How it works →
-            </a>
-          </div>
+         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+  <a 
+    href="/suppliers" 
+    className="w-full sm:w-auto px-8 py-3 bg-[#a0522d] text-white rounded-full font-medium hover:bg-[#8b4513] transition-all text-center"
+  >
+    View suppliers
+  </a>
+  <a 
+    href="#" 
+    className="text-gray-900 font-medium hover:text-[#a0522d] transition-colors flex items-center gap-1"
+  >
+    How it works →
+  </a>
+</div>
         </div>
       </section>
     </main>

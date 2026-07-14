@@ -2,12 +2,17 @@
 import React from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/src/context/AuthContext';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth();
   
   // Safe role check accommodating potential casing differences. Defaults to 'user' if not specified.
   const userRole = user?.role?.toLowerCase() || 'user';
+  const pathname = usePathname();
+  
+  // Admin pages have their own navbar (AdminNavbar)
+  if (pathname?.startsWith('/admin')) return null;
 
   return (
     <header className="border-b border-ink/10 bg-paper/95 sticky top-0 backdrop-blur z-50">

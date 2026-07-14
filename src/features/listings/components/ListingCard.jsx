@@ -82,7 +82,7 @@ export default function ListingCard({ listing }) {
 
         <div className="flex items-center justify-between mt-6">
           <div>
-            <span className="text-3xl font-bold text-[#C19A6B]">
+            <span className="text-3xl font-bold text-rust">
               ${listing.price}
             </span>
 
@@ -95,12 +95,13 @@ export default function ListingCard({ listing }) {
             className="
               px-5
               py-2.5
-              rounded-xl
-              bg-[#C19A6B]
-              text-white
+              rounded-sm
+              bg-rust
+              text-chalk
               font-medium
-              hover:bg-[#a57f55]
-              transition
+              text-sm
+              hover:opacity-90
+              transition-opacity
             "
           >
             View
