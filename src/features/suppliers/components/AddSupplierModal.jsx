@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Button from '@/src/components/ui/Button';
 import { createSupplier } from '../api';
+import { useAuth } from '@/src/context/AuthContext';
 
 export default function AddSupplierModal({ isOpen, onClose, onSuccess }) {
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,7 +26,8 @@ export default function AddSupplierModal({ isOpen, onClose, onSuccess }) {
     setLoading(true);
     setError(null);
     try {
-      await createSupplier(formData);
+      // API expects ownerId
+      await createSupplier({ ...formData, ownerId: user?.id });
       setLoading(false);
       onSuccess(); // Refresh the list and close modal
     } catch (err) {
