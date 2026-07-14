@@ -53,3 +53,16 @@ export const updateSupplierStatus = async (id, status) => {
     return null;
   }
 };
+
+export const createSupplier = async (supplierData) => {
+  try {
+    const data = await apiFetch('/suppliers', {
+      method: 'POST',
+      body: supplierData,
+    });
+    return mapSupplierData(data);
+  } catch (error) {
+    console.error("Failed to create supplier:", error);
+    throw error;
+  }
+};

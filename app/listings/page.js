@@ -1,4 +1,4 @@
-
+import { Suspense } from 'react';
 import { ListingsPage } from '@/src/features/listings';
 
 export const metadata = {
@@ -6,5 +6,9 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <ListingsPage />;
+  return (
+    <Suspense fallback={<div>Loading listings...</div>}>
+      <ListingsPage />
+    </Suspense>
+  );
 }
