@@ -4,11 +4,14 @@ const BASE_URL =
     : (process.env.NEXT_PUBLIC_API_URL || "/api");
 
 export async function apiFetch(path, options = {}) {
+  const isFormData = options.body instanceof FormData;
+
   const headers = {
     ...options.headers,
   };
 
-  if (options.body) {
+  
+  if (options.body && !isFormData) {
     headers["Content-Type"] = "application/json";
   }
 
@@ -16,7 +19,9 @@ export async function apiFetch(path, options = {}) {
     ...options,
     headers,
     credentials: "include",
-    body: options.body ? JSON.stringify(options.body) : undefined,
+    body: isFormData
+      ? options.body
+      : (options.body ? JSON.stringify(options.body) : undefined),
   });
 
   const data = await response.json().catch(() => null);
