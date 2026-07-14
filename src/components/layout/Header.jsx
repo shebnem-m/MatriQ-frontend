@@ -1,13 +1,16 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/src/context/AuthContext';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
-  // Mocking role-based dynamic state for now until frontend-auth is merged
-  const [userRole, setUserRole] = useState('guest'); // 'guest', 'supplier', 'admin'
+  const { user, isAuthenticated, logout } = useAuth();
+  
+  // Safe role check accommodating potential casing differences. Defaults to 'user' if not specified.
+  const userRole = user?.role?.toLowerCase() || 'user';
   const pathname = usePathname();
-
+  
   // Admin pages have their own navbar (AdminNavbar)
   if (pathname?.startsWith('/admin')) return null;
 
@@ -28,31 +31,45 @@ export default function Header() {
 
         {/* Right: Dynamic Role-based Actions */}
         <div className="flex items-center gap-4">
-          {userRole === 'guest' && (
+          {!isAuthenticated && (
             <>
-              <Link href="/login" className="text-sm font-body text-ink/70 hover:text-ink">Log In</Link>
+              <Link href="/login" className="text-sm font-body text-ink/70 hover:text-ink">
+                Log In
+              </Link>
               <Link href="/register" className="px-5 py-2.5 bg-rust text-chalk rounded-sm font-medium text-sm hover:opacity-90 transition-opacity">
                 Sign Up
               </Link>
             </>
           )}
 
-          {userRole === 'supplier' && (
+          {isAuthenticated && userRole === 'supplier' && (
             <>
               <span className="text-sm font-mono text-steel">Supplier Portal</span>
-              <button className="px-5 py-2.5 bg-rust text-chalk rounded-sm font-medium text-sm hover:opacity-90 transition-opacity">
+              <Link href="/suppliers/dashboard" className="px-5 py-2.5 bg-rust text-chalk rounded-sm font-medium text-sm hover:opacity-90 transition-opacity">
                 Dashboard
-              </button>
+              </Link>
+              <button onClick={logout} className="text-sm font-body text-ink/70 hover:text-ink ml-2">Log Out</button>
             </>
           )}
 
-          {userRole === 'admin' && (
+          {isAuthenticated && userRole === 'admin' && (
             <>
               <span className="text-sm font-mono text-steel">Admin</span>
               <Link href="/admin/suppliers" className="px-5 py-2.5 bg-ink text-chalk rounded-sm font-medium text-sm hover:opacity-90 transition-opacity">
                 Admin Panel
               </Link>
+              <button onClick={logout} className="text-sm font-body text-ink/70 hover:text-ink ml-2">Log Out</button>
             </>
+          )}
+
+          {isAuthenticated && userRole !== 'admin' && userRole !== 'supplier' && (
+             <>
+               <span className="text-sm font-mono text-steel">User</span>
+               <Link href="/profile" className="px-5 py-2.5 bg-ink text-chalk rounded-sm font-medium text-sm hover:opacity-90 transition-opacity">
+                 My Profile
+               </Link>
+               <button onClick={logout} className="text-sm font-body text-ink/70 hover:text-ink ml-2">Log Out</button>
+             </>
           )}
         </div>
       </div>
