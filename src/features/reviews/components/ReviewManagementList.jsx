@@ -11,8 +11,8 @@ export default function ReviewManagementList() {
     getAllReviews()
       .then((data) => setReviews(Array.isArray(data) ? data : (data?.content || [])))
       .catch((err) => {
-        console.error("Rəyləri çəkərkən xəta:", err);
-        setError(err.message || "Rəylər yüklənərkən xəta baş verdi.");
+        console.error("Error fetching reviews:", err);
+        setError(err.message || "Failed to load reviews.");
       })
       .finally(() => setLoading(false));
   }, []);
@@ -23,7 +23,7 @@ export default function ReviewManagementList() {
       await deleteReview(id);
       setReviews(reviews.filter((r) => r.id !== id));
     } catch (err) {
-      alert(err.message || "Silinmə zamanı xəta baş verdi!");
+      alert(err.message || "Failed to delete review!");
     }
   };
 
