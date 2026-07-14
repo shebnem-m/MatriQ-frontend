@@ -30,9 +30,12 @@ export const updateListing = async (id, listingData) => {
   });
 };
 
+// Əgər backend @RequestParam gözləyirsə, ID-ni URL-ə əlavə edin
 export const createOrder = async (orderData) => {
-  return await apiFetch("/orders", {
+  // orderData içindən listingId və quantity-ni götürürük
+  // buyerId-ni isə URL-ə əlavə edirik (backend-dən necə tələb olunduğuna baxın)
+  return await apiFetch(`/orders?buyerId=${orderData.buyerId}`, {
     method: "POST",
-    body: orderData,
+    body: { listingId: orderData.listingId, quantity: orderData.quantity },
   });
 };

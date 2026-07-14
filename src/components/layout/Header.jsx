@@ -1,10 +1,15 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   // Mocking role-based dynamic state for now until frontend-auth is merged
   const [userRole, setUserRole] = useState('guest'); // 'guest', 'supplier', 'admin'
+  const pathname = usePathname();
+
+  // Admin pages have their own navbar (AdminNavbar)
+  if (pathname?.startsWith('/admin')) return null;
 
   return (
     <header className="border-b border-ink/10 bg-paper/95 sticky top-0 backdrop-blur z-50">
