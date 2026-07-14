@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import SupplierVerificationTable from '@/src/features/suppliers/components/SupplierVerificationTable';
 import AddSupplierModal from '@/src/features/suppliers/components/AddSupplierModal';
-import { fetchSuppliers } from '@/src/features/suppliers/api';
+import { fetchSuppliers, deleteSupplier } from '@/src/features/suppliers/api';
 
 export default function AdminSuppliersPage() {
   const [suppliers, setSuppliers] = useState([]);
@@ -21,6 +21,13 @@ export default function AdminSuppliersPage() {
     load();
   }, [load]);
 
+  const handleDeleteSupplier = async (id) => {
+    if (confirm('Are you sure you want to delete this supplier?')) {
+      await deleteSupplier(id);
+      load(); // Refresh the list
+    }
+  };
+
   if (loading && suppliers.length === 0) {
     return (
       <div className="flex-1 p-6 flex items-center justify-center">
@@ -32,7 +39,11 @@ export default function AdminSuppliersPage() {
   return (
     <div className="flex-1 bg-chalk p-8">
       <div className="max-w-7xl mx-auto">
-        <SupplierVerificationTable suppliers={suppliers} onAddSupplier={() => setIsModalOpen(true)} />
+        <SupplierVerificationTable 
+          suppliers={suppliers} 
+          onAddSupplier={() => setIsModalOpen(true)}
+          onDeleteSupplier={handleDeleteSupplier}
+        />
       </div>
       <AddSupplierModal 
         isOpen={isModalOpen} 

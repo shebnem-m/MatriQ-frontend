@@ -66,3 +66,15 @@ export const createSupplier = async (supplierData) => {
     throw error;
   }
 };
+
+export const deleteSupplier = async (id) => {
+  try {
+    await apiFetch(`/suppliers/${id}`, {
+      method: 'DELETE',
+    });
+    return true;
+  } catch (error) {
+    console.error(`Failed to delete supplier ${id}:`, error);
+    throw error;
+  }
+};
