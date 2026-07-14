@@ -1,10 +1,16 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/src/context/AuthContext';
 
 export default function Header() {
-  // Mocking role-based dynamic state for now until frontend-auth is merged
-  const [userRole, setUserRole] = useState('guest'); // 'guest', 'supplier', 'admin'
+  const { user, isAuthenticated, loading } = useAuth();
+  
+  // Use user.role if provided by backend, otherwise default to admin if logged in
+  const userRole = isAuthenticated ? (user?.role?.toLowerCase() || 'admin') : 'guest';
+
+  // Prevent flash of wrong header during initial auth check
+  if (loading) return <header className="h-[73px] border-b border-ink/10 bg-paper/95 sticky top-0 backdrop-blur z-50" />;
 
   return (
     <header className="border-b border-ink/10 bg-paper/95 sticky top-0 backdrop-blur z-50">
