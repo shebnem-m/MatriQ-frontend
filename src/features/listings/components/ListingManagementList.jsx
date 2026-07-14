@@ -2,12 +2,23 @@
 import { useEffect, useState } from "react";
 import { fetchListings, deleteListing, updateListing } from "../api";
 import Image from "next/image";
+import AddListingForm from "./AddListingForm";
+
+
+const API_HOST = process.env.NEXT_PUBLIC_API_HOST || "http://localhost:8080";
+
+const getImageSrc = (url) => {
+  if (!url) return null;
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  return `${API_HOST}${url.startsWith("/") ? "" : "/"}${url}`;
+};
 
 export default function ListingManagementList() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
+  const [showAddForm, setShowAddForm] = useState(false);
 
   const loadListings = async () => {
     try {
@@ -37,25 +48,46 @@ export default function ListingManagementList() {
     }
   };
 
- const handleDelete = async (id) => {
-  if (!confirm("Are you sure?")) return;
-  try {
-    await deleteListing(id);
-    setListings(listings.filter((l) => l.id !== id));
-  } catch (error) {
-    const rawMessage = error?.message || "";
-    if (rawMessage.toLowerCase().includes("foreign key") || rawMessage.toLowerCase().includes("constraint")) {
-      alert("This listing cannot be deleted because it has existing orders. Deactivate it instead.");
-    } else {
-      alert(rawMessage || "Failed to delete listing.");
+  const handleDelete = async (id) => {
+    if (!confirm("Are you sure?")) return;
+    try {
+      await deleteListing(id);
+      setListings(listings.filter((l) => l.id !== id));
+    } catch (error) {
+      const rawMessage = error?.message || "";
+      if (rawMessage.toLowerCase().includes("foreign key") || rawMessage.toLowerCase().includes("constraint")) {
+        alert("This listing cannot be deleted because it has existing orders. Deactivate it instead.");
+      } else {
+        alert(rawMessage || "Failed to delete listing.");
+      }
     }
-  }
-};
+  };
+
+  const handleCreated = (created) => {
+    setListings((prev) => [...prev, created]);
+    setShowAddForm(false);
+  };
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className="space-y-4">
+      <div className="flex justify-end">
+        <button
+          onClick={() => setShowAddForm((prev) => !prev)}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          {showAddForm ? "Cancel" : "+ Add Listing"}
+        </button>
+      </div>
+
+      {showAddForm && (
+        <AddListingForm
+          onCreated={handleCreated}
+          onCancel={() => setShowAddForm(false)}
+        />
+      )}
+
       {listings.map((listing) => (
         <div key={listing.id} className="flex items-center gap-6 p-6 border rounded-xl">
           {editingId === listing.id ? (
@@ -69,7 +101,7 @@ export default function ListingManagementList() {
             <>
               <div className="w-16 h-16 relative bg-zinc-100 rounded-lg overflow-hidden">
                 {listing.imageUrl && (
-                  <Image src={listing.imageUrl} alt={listing.title} fill sizes="64px" className="object-cover" />
+                  <Image src={getImageSrc(listing.imageUrl)} alt={listing.title} fill sizes="64px" className="object-cover" unoptimized />
                 )}
               </div>
               <span className="w-40">{listing.title}</span>
