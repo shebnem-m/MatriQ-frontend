@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Menu, Globe, Bell, User } from "lucide-react";
+import { Menu, User } from "lucide-react";
 
 const PAGE_TITLES = [
   { href: "/admin/users", title: "Users" },
@@ -38,25 +38,6 @@ export default function AdminNavbar() {
 
         {/* Right: language, notifications, profile */}
         <div className="flex items-center gap-1 sm:gap-2">
-          <button
-            type="button"
-            aria-label="Change language"
-            className="rounded-full p-2 text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
-          >
-            <Globe className="h-5 w-5" />
-          </button>
-
-          <button
-            type="button"
-            aria-label="Notifications"
-            className="relative rounded-full p-2 text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
-          >
-            <Bell className="h-5 w-5" />
-            <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-rust text-[10px] font-semibold leading-none text-chalk">
-              3
-            </span>
-          </button>
-
           <button
             type="button"
             aria-label="Profile"
