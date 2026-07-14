@@ -1,7 +1,14 @@
+"use client";
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // Admin pages render their own footer inside the dashboard area
+  if (pathname?.startsWith('/admin')) return null;
+
   return (
     <footer className="border-t border-ink/10 mt-auto bg-paper">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12 md:py-16">
@@ -30,18 +37,18 @@ export default function Footer() {
           <div>
             <span className="block font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-4">Company</span>
             <ul className="space-y-3 text-sm font-body text-ink/70">
-              <li><Link href="/about" className="hover:text-ink transition-colors">About Us</Link></li>
-              <li><Link href="/careers" className="hover:text-ink transition-colors">Careers</Link></li>
-              <li><Link href="/contact" className="hover:text-ink transition-colors">Contact</Link></li>
+              <li><Link href="/info#about" className="hover:text-ink transition-colors">About Us</Link></li>
+              <li><Link href="/info#careers" className="hover:text-ink transition-colors">Careers</Link></li>
+              <li><Link href="/info#contact" className="hover:text-ink transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           <div>
             <span className="block font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-4">Legal</span>
             <ul className="space-y-3 text-sm font-body text-ink/70">
-              <li><Link href="/terms" className="hover:text-ink transition-colors">Terms of Service</Link></li>
-              <li><Link href="/privacy" className="hover:text-ink transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/guidelines" className="hover:text-ink transition-colors">Verification Guidelines</Link></li>
+              <li><Link href="/info#terms" className="hover:text-ink transition-colors">Terms of Service</Link></li>
+              <li><Link href="/info#privacy" className="hover:text-ink transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/info#guidelines" className="hover:text-ink transition-colors">Verification Guidelines</Link></li>
             </ul>
           </div>
         </div>

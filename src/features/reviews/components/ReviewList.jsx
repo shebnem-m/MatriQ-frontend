@@ -13,7 +13,7 @@ export default function ReviewList({ listingId }) {
         const data = await fetchReviewsByListing(listingId);
         setReviews(Array.isArray(data) ? data : (data?.content || []));
       } catch (error) {
-        console.error("Rəyləri çəkərkən xəta baş verdi:", error);
+        console.error("Error happened when fetching reviews:", error);
       } finally {
         setLoading(false);
       }
