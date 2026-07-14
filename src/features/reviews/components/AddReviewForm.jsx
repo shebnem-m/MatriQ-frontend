@@ -13,12 +13,12 @@ export default function AddReviewForm({ listingId, onReviewAdded }) {
   e.preventDefault();
 
   if (!comment.trim()) {
-    alert("Rəy yazmalısınız!");
+    alert("Please write a review!");
     return;
   }
 
   if (!user?.id) {
-    alert("Rəy yazmaq üçün daxil olmalısınız!");
+    alert("You must be logged in to write a review!");
     return;
   }
 
@@ -31,14 +31,14 @@ export default function AddReviewForm({ listingId, onReviewAdded }) {
       comment: comment.trim(),
     });
 
-    alert("Rəyiniz uğurla əlavə edildi! 🎉");
+    alert("Your review has been submitted successfully! 🎉");
     setComment("");
     setRating(5);
     if (onReviewAdded) onReviewAdded();
 
   } catch (error) {
     console.error("Full Review Error:", error);
-    alert(error.message || "Rəy göndərilərkən xəta baş verdi!");
+    alert(error.message || "An error occurred while submitting your review!");
 
   } finally {
     setIsSubmitting(false);
@@ -76,7 +76,7 @@ export default function AddReviewForm({ listingId, onReviewAdded }) {
         disabled={isSubmitting}
         className="w-full bg-rust hover:bg-rust/90 text-white font-semibold py-3 rounded-xl transition-colors disabled:opacity-50"
       >
-        {isSubmitting ? "Göndərilir..." : "Submit Review"}
+        {isSubmitting ? "Submitting..." : "Submit Review"}
       </button>
     </form>
   );
