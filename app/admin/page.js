@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Package,
   ShoppingCart,
@@ -123,14 +124,14 @@ function CardHeader({ title, action }) {
   );
 }
 
-function ViewAllButton() {
+function ViewAllButton({ href }) {
   return (
-    <button
-      type="button"
+    <Link
+      href={href}
       className="rounded-sm bg-rust px-3 py-1.5 text-xs font-medium text-chalk transition-opacity hover:opacity-90"
     >
       View All
-    </button>
+    </Link>
   );
 }
 
@@ -291,7 +292,7 @@ function TopCategoriesCard() {
 function LowStockCard() {
   return (
     <Card>
-      <CardHeader title="Low Stock Products" action={<ViewAllButton />} />
+      <CardHeader title="Low Stock Products" action={<ViewAllButton href="/admin/listings" />} />
       <ul className="divide-y divide-ink/5 px-5 pb-2 pt-1">
         {LOW_STOCK.map(({ name, stock }) => (
           <li key={name} className="flex items-center justify-between gap-3 py-3">
@@ -312,7 +313,7 @@ function LowStockCard() {
 function RecentOrdersCard() {
   return (
     <Card>
-      <CardHeader title="Recent Orders" action={<ViewAllButton />} />
+      <CardHeader title="Recent Orders" action={<ViewAllButton href="/admin/orders" />} />
       <ul className="divide-y divide-ink/5 px-5 pb-2 pt-1">
         {RECENT_ORDERS.map(({ id, product, price, status }) => (
           <li key={id} className="flex items-center justify-between gap-3 py-3.5">
@@ -343,7 +344,7 @@ function RecentOrdersCard() {
 function RecentMessagesCard() {
   return (
     <Card>
-      <CardHeader title="Recent Messages" action={<ViewAllButton />} />
+      <CardHeader title="Recent Messages" />
       <ul className="divide-y divide-ink/5 px-5 pb-2 pt-1">
         {RECENT_MESSAGES.map(({ name, initials, subject, time }) => (
           <li key={name} className="flex items-center gap-3 py-3.5">
