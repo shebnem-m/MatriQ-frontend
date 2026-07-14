@@ -4,7 +4,10 @@ import ListingDetail from '@/src/features/listings/components/ListingDetail';
 export default async function ListingPage({ params }) {
   const { id } = await params;
 
-  const listing = await apiFetch(`/listings/${id}`).catch(() => null);
+  const listing = await apiFetch(`/listings/${id}`).catch((err) => {
+    console.error('Failed to fetch listing:', err);
+    return null;
+  });   
 
   if (!listing) {
     return (
