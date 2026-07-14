@@ -5,18 +5,13 @@ import SupplierProfileLayout from '@/src/features/suppliers/components/SupplierP
 import { fetchSupplierById } from '@/src/features/suppliers/api';
 
 export default function SupplierProfilePage({ params }) {
+  const unwrappedParams = React.use(params);
+  const id = unwrappedParams?.id;
   const [supplier, setSupplier] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  // Unwrap params using React.use() if this was a server component in Next 15+,
-  // but since we are using 'use client' and older Next patterns, we can use params directly
-  // or wrap it if needed. Let's assume standard behavior.
-  
   useEffect(() => {
     async function load() {
-      // In Next.js 13+ app router, params might be a promise in latest versions, 
-      // but usually standard object in 13/14 client components.
-      const id = params?.id;
       if (id) {
         const data = await fetchSupplierById(id);
         setSupplier(data);
@@ -24,7 +19,7 @@ export default function SupplierProfilePage({ params }) {
       setLoading(false);
     }
     load();
-  }, [params]);
+  }, [id]);
 
   if (loading) {
     return <SupplierProfileLayout supplierName="Loading...">

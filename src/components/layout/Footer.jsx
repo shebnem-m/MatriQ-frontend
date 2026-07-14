@@ -37,18 +37,18 @@ export default function Footer() {
           <div>
             <span className="block font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-4">Company</span>
             <ul className="space-y-3 text-sm font-body text-ink/70">
-              <li><Link href="/about" className="hover:text-ink transition-colors">About Us</Link></li>
-              <li><Link href="/careers" className="hover:text-ink transition-colors">Careers</Link></li>
-              <li><Link href="/contact" className="hover:text-ink transition-colors">Contact</Link></li>
+              <li><Link href="/info#about" className="hover:text-ink transition-colors">About Us</Link></li>
+              <li><Link href="/info#careers" className="hover:text-ink transition-colors">Careers</Link></li>
+              <li><Link href="/info#contact" className="hover:text-ink transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           <div>
             <span className="block font-mono text-[11px] tracking-[0.18em] text-steel uppercase mb-4">Legal</span>
             <ul className="space-y-3 text-sm font-body text-ink/70">
-              <li><Link href="/terms" className="hover:text-ink transition-colors">Terms of Service</Link></li>
-              <li><Link href="/privacy" className="hover:text-ink transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/guidelines" className="hover:text-ink transition-colors">Verification Guidelines</Link></li>
+              <li><Link href="/info#terms" className="hover:text-ink transition-colors">Terms of Service</Link></li>
+              <li><Link href="/info#privacy" className="hover:text-ink transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/info#guidelines" className="hover:text-ink transition-colors">Verification Guidelines</Link></li>
             </ul>
           </div>
         </div>

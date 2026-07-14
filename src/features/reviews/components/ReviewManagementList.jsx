@@ -1,20 +1,35 @@
 "use client";
 import { useEffect, useState } from "react";
-import { deleteReview, getAllReviews } from "../api"; // API-nə bu funksiyaları əlavə et
+import { deleteReview, getAllReviews } from "../api";
 
 export default function ReviewManagementList() {
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getAllReviews().then(setReviews);
+    getAllReviews()
+      .then((data) => setReviews(Array.isArray(data) ? data : (data?.content || [])))
+      .catch((err) => {
+        console.error("Rəyləri çəkərkən xəta:", err);
+        setError(err.message || "Rəylər yüklənərkən xəta baş verdi.");
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const handleDelete = async (id) => {
-    if (confirm("Are you sure you want to delete this review?")) {
+    if (!confirm("Are you sure you want to delete this review?")) return;
+    try {
       await deleteReview(id);
       setReviews(reviews.filter((r) => r.id !== id));
+    } catch (err) {
+      alert(err.message || "Silinmə zamanı xəta baş verdi!");
     }
   };
+
+  if (loading) return <p className="text-sm text-zinc-500">Loading...</p>;
+  if (error) return <p className="text-sm text-red-500">{error}</p>;
+  if (reviews.length === 0) return <p className="text-sm text-zinc-500 italic">No reviews yet.</p>;
 
   return (
     <div className="space-y-4">
@@ -24,7 +39,7 @@ export default function ReviewManagementList() {
           <span className="w-24 text-yellow-500">{"★".repeat(review.rating)}</span>
           <p className="flex-1 text-sm text-zinc-600 truncate">{review.comment}</p>
           <span className="w-32 text-sm text-zinc-500">{new Date(review.createdAt).toLocaleDateString()}</span>
-          <button 
+          <button
             onClick={() => handleDelete(review.id)}
             className="w-20 text-red-600 hover:text-red-800 text-sm font-medium"
           >
