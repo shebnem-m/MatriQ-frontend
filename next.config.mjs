@@ -5,10 +5,18 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "privoz43.ru",
-        port: "", 
-        pathname: "/upload/**", 
+        port: "",
+        pathname: "/upload/**",
       },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:8080/:path*", // öz backend portunuzu yazın
+      },
+    ];
   },
 };
 
