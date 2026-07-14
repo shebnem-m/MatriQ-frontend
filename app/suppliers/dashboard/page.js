@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import SupplierDashboard from '@/src/features/suppliers/components/SupplierDashboard';
-import { fetchSupplierById } from '@/src/features/suppliers/api';
+import { fetchSuppliers } from '@/src/features/suppliers/api';
 
 export default function SupplierDashboardPage() {
   const [supplier, setSupplier] = useState(null);
@@ -10,9 +10,13 @@ export default function SupplierDashboardPage() {
 
   useEffect(() => {
     async function load() {
-      // In a real app, this would use the logged-in user's ID
-      const data = await fetchSupplierById('1');
-      setSupplier(data);
+      // Safely fetch the first available supplier instead of hardcoding '1' (which breaks UUID databases)
+      const allSuppliers = await fetchSuppliers();
+      if (allSuppliers && allSuppliers.length > 0) {
+        setSupplier(allSuppliers[0]);
+      } else {
+        setSupplier(null);
+      }
       setLoading(false);
     }
     load();

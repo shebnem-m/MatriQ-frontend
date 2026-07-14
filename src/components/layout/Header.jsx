@@ -30,10 +30,10 @@ export default function Header() {
         <div className="flex items-center gap-4">
           {userRole === 'guest' && (
             <>
-              <button className="text-sm font-body text-ink/70 hover:text-ink">Log In</button>
-              <button className="px-5 py-2.5 bg-rust text-chalk rounded-sm font-medium text-sm hover:opacity-90 transition-opacity">
+              <Link href="/login" className="text-sm font-body text-ink/70 hover:text-ink">Log In</Link>
+              <Link href="/register" className="px-5 py-2.5 bg-rust text-chalk rounded-sm font-medium text-sm hover:opacity-90 transition-opacity">
                 Sign Up
-              </button>
+              </Link>
             </>
           )}
 
