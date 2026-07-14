@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function SupplierVerificationTable({ suppliers, onAddSupplier }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const totalPages = Math.max(1, Math.ceil(suppliers.length / itemsPerPage));
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentSuppliers = suppliers.slice(startIndex, startIndex + itemsPerPage);
+
   // Use dates from mock data or formatted specifically
   const formatDate = (dateStr) => {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -16,10 +23,6 @@ export default function SupplierVerificationTable({ suppliers, onAddSupplier }) 
           <p className="text-ink/60 text-sm">Verify and manage supplier applications</p>
         </div>
         <div className="flex gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 border border-ink/20 rounded-sm font-medium text-sm hover:bg-ink/5">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            Export
-          </button>
           <button onClick={onAddSupplier} className="flex items-center gap-2 px-4 py-2 bg-rust text-chalk rounded-sm font-medium text-sm hover:bg-rust/90">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             Add Supplier
@@ -75,13 +78,12 @@ export default function SupplierVerificationTable({ suppliers, onAddSupplier }) 
               <th className="font-display font-600 text-xs py-4 px-6 text-ink/80">Supplier</th>
               <th className="font-display font-600 text-xs py-4 px-6 text-ink/80">Company Info</th>
               <th className="font-display font-600 text-xs py-4 px-6 text-ink/80">Applied On</th>
-              <th className="font-display font-600 text-xs py-4 px-6 text-ink/80">Documents</th>
               <th className="font-display font-600 text-xs py-4 px-6 text-ink/80">Status</th>
               <th className="font-display font-600 text-xs py-4 px-6 text-ink/80">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {suppliers.map((supplier, idx) => (
+            {currentSuppliers.map((supplier, idx) => (
               <tr key={supplier.id} className="border-b border-ink/10 hover:bg-paper2/20">
                 <td className="py-4 px-6">
                   <div className="flex items-center gap-3">
@@ -104,17 +106,6 @@ export default function SupplierVerificationTable({ suppliers, onAddSupplier }) 
                 </td>
                 <td className="py-4 px-6">
                   <p className="text-sm text-ink/80">{formatDate(supplier.appliedOn)}</p>
-                </td>
-                <td className="py-4 px-6">
-                  <div className="flex flex-col items-start gap-1">
-                    <p className="text-xs text-ink/80 flex items-center gap-1">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                      {supplier.documentsCount} files
-                    </p>
-                    <button className="text-[10px] uppercase tracking-wider font-mono text-rust border border-rust/30 px-2 py-0.5 rounded-sm hover:bg-rust/5">
-                      View
-                    </button>
-                  </div>
                 </td>
                 <td className="py-4 px-6">
                   <span className="bg-[#FDF1E8] text-rust px-3 py-1 rounded-sm text-xs font-medium">
@@ -142,21 +133,37 @@ export default function SupplierVerificationTable({ suppliers, onAddSupplier }) 
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
-        <p className="text-sm text-ink/60">Showing 1 to 5 of 12 pending applications</p>
+        <p className="text-sm text-ink/60">
+          Showing {Math.min(startIndex + 1, suppliers.length)} to {Math.min(startIndex + itemsPerPage, suppliers.length)} of {suppliers.length} applications
+        </p>
         <div className="flex gap-2">
-          <button className="w-8 h-8 flex items-center justify-center border border-ink/10 rounded-sm hover:bg-paper2">
+          <button 
+            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="w-8 h-8 flex items-center justify-center border border-ink/10 rounded-sm hover:bg-paper2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
-          <button className="w-8 h-8 flex items-center justify-center bg-rust text-chalk rounded-sm font-medium text-sm">
-            1
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center border border-ink/10 rounded-sm font-medium text-sm hover:bg-paper2">
-            2
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center border border-ink/10 rounded-sm font-medium text-sm hover:bg-paper2">
-            3
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center border border-ink/10 rounded-sm hover:bg-paper2">
+          
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button 
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`w-8 h-8 flex items-center justify-center rounded-sm font-medium text-sm ${
+                currentPage === i + 1 
+                  ? 'bg-rust text-chalk' 
+                  : 'border border-ink/10 hover:bg-paper2'
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button 
+            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="w-8 h-8 flex items-center justify-center border border-ink/10 rounded-sm hover:bg-paper2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </button>
         </div>
