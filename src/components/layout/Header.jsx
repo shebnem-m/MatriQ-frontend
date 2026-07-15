@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/src/context/AuthContext';
 import { usePathname } from 'next/navigation';
+import OrdersButton from '@/src/features/orders/components/OrdersButton';
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth();
@@ -65,6 +66,7 @@ export default function Header() {
           {isAuthenticated && userRole !== 'admin' && userRole !== 'supplier' && (
              <>
                <span className="text-sm font-mono text-steel">User</span>
+               <OrdersButton></OrdersButton>
                <Link href="/profile" className="px-5 py-2.5 bg-ink text-chalk rounded-sm font-medium text-sm hover:opacity-90 transition-opacity">
                  My Profile
                </Link>
