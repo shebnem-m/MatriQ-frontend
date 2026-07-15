@@ -6,14 +6,17 @@ import { usePathname } from 'next/navigation';
 import OrdersButton from '@/src/features/orders/components/OrdersButton';
 
 export default function Header() {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, loading, logout } = useAuth();
   
-  // Safe role check accommodating potential casing differences. Defaults to 'user' if not specified.
-  const userRole = user?.role?.toLowerCase() || 'user';
+  // Safe role check
+  const userRole = isAuthenticated ? (user?.role?.toLowerCase() || 'admin') : 'guest';
   const pathname = usePathname();
   
   // Admin pages have their own navbar (AdminNavbar)
   if (pathname?.startsWith('/admin')) return null;
+
+  // Prevent flash of wrong header during initial auth check
+  if (loading) return <header className="h-[73px] border-b border-ink/10 bg-paper/95 sticky top-0 backdrop-blur z-50" />;
 
   return (
     <header className="border-b border-ink/10 bg-paper/95 sticky top-0 backdrop-blur z-50">
