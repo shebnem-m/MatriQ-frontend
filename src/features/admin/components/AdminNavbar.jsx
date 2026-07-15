@@ -43,7 +43,7 @@ export default function AdminNavbar({ onMenuClick }) {
   return (
     <header className="sticky top-0 z-30 border-b border-ink/10 bg-chalk">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6">
-        {/* Left: menu toggle + page title */}
+        {/* Sol tərəf: Menyu düyməsi və Səhifə Başlığı */}
         <div className="flex items-center gap-4 pl-12 md:pl-0">
           <button
             type="button"
@@ -58,27 +58,60 @@ export default function AdminNavbar({ onMenuClick }) {
           </h1>
         </div>
 
-        {/* Right: language, notifications, profile */}
+        {/* Sağ tərəf: İkonlar və Profil */}
         <div className="flex items-center gap-1 sm:gap-2">
-          <button
-            type="button"
-            aria-label="Change language"
-            className="rounded-full p-2 text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
+          
+          {/* Globe (Dil seçimi) - desktop: hover, mobile: tap */}
+          <div
+            className="group relative"
+            ref={globeRef}
+            onMouseEnter={() => setIsGlobeOpen(true)}
+            onMouseLeave={() => setIsGlobeOpen(false)}
           >
-            <Globe className="h-5 w-5" />
-          </button>
+            <button
+              type="button"
+              aria-label="Change language"
+              onClick={() => setIsGlobeOpen((prev) => !prev)}
+              className="rounded-full p-2 text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
+            >
+              <Globe className="h-5 w-5" />
+            </button>
 
-          <button
-            type="button"
-            aria-label="Notifications"
-            className="relative rounded-full p-2 text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
+            {isGlobeOpen && (
+              <div className="absolute right-0 mt-2 w-56 rounded-lg border border-ink/10 bg-white p-4 text-sm text-ink/60 shadow-lg z-50">
+                Language selection coming soon.
+              </div>
+            )}
+          </div>
+
+          {/* Bell (Bildirişlər) - desktop: hover, mobile: tap */}
+          <div
+            className="group relative"
+            ref={bellRef}
+            onMouseEnter={() => setIsBellOpen(true)}
+            onMouseLeave={() => setIsBellOpen(false)}
           >
-            <Bell className="h-5 w-5" />
-            <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-rust text-[10px] font-semibold leading-none text-chalk">
-              3
-            </span>
-          </button>
+            <button
+              type="button"
+              aria-label="Notifications"
+              onClick={() => setIsBellOpen((prev) => !prev)}
+              className="relative rounded-full p-2 text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
+            >
+              <Bell className="h-5 w-5" />
+              {/* Qırmızı bildiriş nişanı bura yerləşdirildi */}
+              <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-rust text-[10px] font-semibold leading-none text-chalk">
+                3
+              </span>
+            </button>
 
+            {isBellOpen && (
+              <div className="absolute right-0 mt-2 w-56 rounded-lg border border-ink/10 bg-white p-4 text-sm text-ink/60 shadow-lg z-50">
+                Notifications coming soon.
+              </div>
+            )}
+          </div>
+
+          {/* Profil Düyməsi */}
           <button
             type="button"
             aria-label="Profile"
@@ -87,6 +120,7 @@ export default function AdminNavbar({ onMenuClick }) {
           >
             <User className="h-5 w-5" />
           </button>
+
         </div>
       </div>
     </header>
