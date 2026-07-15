@@ -5,6 +5,7 @@ React and Next.js frontend application for MatriQ, a material sourcing platform 
 ## Project Links
 - Backend Repository: https://github.com/shebnem-m/MatriQ-backend
 - Live Application: https://matriq-frontend-tan.vercel.app
+- Project Management Board: https://mini-task-manager-bay.vercel.app/
 
 ## Tech Stack
 - Next.js (App Router)
