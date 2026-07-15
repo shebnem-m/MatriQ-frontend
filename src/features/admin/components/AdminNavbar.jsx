@@ -43,6 +43,7 @@ export default function AdminNavbar({ onMenuClick }) {
   return (
     <header className="sticky top-0 z-30 border-b border-ink/10 bg-chalk">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6">
+        {/* Sol tərəf: Menyu düyməsi və Səhifə Başlığı */}
         <div className="flex items-center gap-4 pl-12 md:pl-0">
           <button
             type="button"
@@ -57,9 +58,10 @@ export default function AdminNavbar({ onMenuClick }) {
           </h1>
         </div>
 
+        {/* Sağ tərəf: İkonlar və Profil */}
         <div className="flex items-center gap-1 sm:gap-2">
-
-          {/* Globe - desktop: hover, mobile: tap */}
+          
+          {/* Globe (Dil seçimi) - desktop: hover, mobile: tap */}
           <div
             className="group relative"
             ref={globeRef}
@@ -82,7 +84,7 @@ export default function AdminNavbar({ onMenuClick }) {
             )}
           </div>
 
-          {/* Bell - desktop: hover, mobile: tap */}
+          {/* Bell (Bildirişlər) - desktop: hover, mobile: tap */}
           <div
             className="group relative"
             ref={bellRef}
@@ -96,6 +98,10 @@ export default function AdminNavbar({ onMenuClick }) {
               className="relative rounded-full p-2 text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
             >
               <Bell className="h-5 w-5" />
+              {/* Qırmızı bildiriş nişanı bura yerləşdirildi */}
+              <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-rust text-[10px] font-semibold leading-none text-chalk">
+                3
+              </span>
             </button>
 
             {isBellOpen && (
@@ -105,7 +111,7 @@ export default function AdminNavbar({ onMenuClick }) {
             )}
           </div>
 
-          {/* Profile */}
+          {/* Profil Düyməsi */}
           <button
             type="button"
             aria-label="Profile"
@@ -114,6 +120,7 @@ export default function AdminNavbar({ onMenuClick }) {
           >
             <User className="h-5 w-5" />
           </button>
+
         </div>
       </div>
     </header>

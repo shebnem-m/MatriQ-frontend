@@ -1,62 +1,101 @@
-# MatriQ-Frontend
+# MatriQ - Frontend
 
-Next.js frontend for MatriQ, a material sourcing platform for architects, interior designers, and construction engineers. MatriQ streamlines material discovery, technical specification verification, and the Request for Quote (RFQ) process into a single digital workspace.
+React and Next.js frontend application for MatriQ, a material sourcing platform for architects, interior designers, and construction engineers. MatriQ streamlines material discovery, technical specification verification, and the Request for Quote (RFQ) process into a single digital workspace.
+
+## Project Links
+- Backend Repository: https://github.com/shebnem-m/MatriQ-backend
+- Live Application: https://matriq-frontend-tan.vercel.app
+- Project Management Board: https://mini-task-manager-bay.vercel.app/
 
 ## Tech Stack
 - Next.js (App Router)
 - React
-- Axios
 - Tailwind CSS
-- JWT Authentication (httpOnly cookies)
+- Lucide React (for modern SVG iconography)
+- Axios / Native Fetch
+- JWT Authentication (httpOnly Cookies)
 
-## Pages
-- `/login` - Authentication
-- `/register` - User registration
-- `/materials` - Browse and filter materials
-- `/materials/[id]` - Material detail and RFQ
-- `/suppliers/[id]` - Supplier profile
+## Project Architecture and Folder Rules
+To maintain consistency across all team members, the following architectural guidelines are strictly enforced:
 
-## Backend Repository
-https://github.com/shebnem-m/MatriQ-backend
+1. App Router: All route definitions reside in the `app/` directory. Files in this directory must remain thin and delegate rendering logic to features.
+2. Feature-Sliced Design: Business logic is organized under `src/features/{feature}/`. Each feature directory encapsulates its own components, hooks, type definitions, and API client calls.
+3. Code Reusability: Generic presenter elements (buttons, inputs, tables, modals) are maintained inside `src/components/ui/` and must not be duplicated.
+4. Centralized Network Requests: All external API interactions must utilize the shared configured client in `src/lib/apiClient.js` to ensure uniform credential and session context propagation.
+5. Auth Guards: Access to protected routes is globally regulated utilizing the shared `<ProtectedRoute>` component.
 
-## Status
-In development
+## Route Documentation
 
+### Public Routes
+- `/` - Landing and system overview portal
+- `/login` - Authentication gate
+- `/register` - User registration workspace
+- `/listings` - Material exploration, filtering, and paging
+- `/listings/[id]` - Material technical breakdown and client reviews
+- `/suppliers` - Register of verified production suppliers
+- `/suppliers/[id]` - Supplier profile and associated catalog
 
+### Private User Routes
+- `/profile` - Client account and notification settings
+- `/orders` - Personal transaction and order history
+- `/orders/[id]` - Individual order details and processing status
+- `/orders/checkout` - Quote request execution view
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Protected Supplier Routes
+- `/listings/new` - Listing management and creation suite
+- `/suppliers/dashboard` - Supplier transaction and order management workspace
 
-## Getting Started
+### Admin Management Routes
+- `/admin` - Base layout for platform management (restricted to ADMIN role)
+- `/admin/users` - Role assignment and user account moderation
+- `/admin/orders` - Platform transaction tracking and oversight
+- `/admin/listings` - Catalog filtering and review deletion
+- `/admin/suppliers` - Manufacturer authentication and approval workspace
 
-First, run the development server:
+## Environment Variables
+Create a local configuration file named `.env.local` in the root of the project to bind the variables:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- NEXT_PUBLIC_API_URL - Base destination URL for the running Spring Boot service
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation and Development Setup
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Prerequisites
+- Node.js 18.0.0 or higher
+- npm or yarn package manager
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Local Installation
+1. Clone the repository:
+   git clone https://github.com/shebnem-m/MatriQ-frontend.git
 
-## Learn More
+2. Navigate to the project directory:
+   cd MatriQ-frontend
 
-To learn more about Next.js, take a look at the following resources:
+3. Install project dependencies:
+   npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Configure local variables:
+   Create a `.env.local` file in the root directory and configure the environment:
+   NEXT_PUBLIC_API_URL=http://localhost:8080
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. Run the development server:
+   npm run dev
 
-## Deploy on Vercel
+6. Access the workspace locally at http://localhost:3000.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Compilation and Build
+To compile optimized production assets:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm run build
+
+This outputs optimized assets to the `.next` directory.
+
+## Team Information
+- Shabnam Muradova - Profile Page, Admin Panel Dashboard, Admin Users Management & Frontend Deployment  
+  [GitHub](https://github.com/shebnem-m)
+- Mohsin - Supplier Directory, Dashboard & Verification Workspaces  
+  [GitHub](https://github.com/Anar5432)
+- Yaqut Rasulbayli - Material Catalog, Review Integrations & Access Moderation  
+  [GitHub](https://github.com/yagutrslbyl)
+- Nihad Bagirzade - Application Shell, Order Tracking, Authentication (Register/Login) & Session Flows  
+ [GitHub](https://github.com/TheGlitch26)
+  
