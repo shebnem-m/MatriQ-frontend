@@ -43,7 +43,6 @@ export default function AdminNavbar({ onMenuClick }) {
   return (
     <header className="sticky top-0 z-30 border-b border-ink/10 bg-chalk">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6">
-        {/* Left: menu toggle + page title */}
         <div className="flex items-center gap-4 pl-12 md:pl-0">
           <button
             type="button"
@@ -58,11 +57,15 @@ export default function AdminNavbar({ onMenuClick }) {
           </h1>
         </div>
 
-        {/* Right: language, notifications, profile */}
         <div className="flex items-center gap-1 sm:gap-2">
 
-          {/* Globe - placeholder */}
-          <div className="relative" ref={globeRef}>
+          {/* Globe - desktop: hover, mobile: tap */}
+          <div
+            className="group relative"
+            ref={globeRef}
+            onMouseEnter={() => setIsGlobeOpen(true)}
+            onMouseLeave={() => setIsGlobeOpen(false)}
+          >
             <button
               type="button"
               aria-label="Change language"
@@ -73,14 +76,19 @@ export default function AdminNavbar({ onMenuClick }) {
             </button>
 
             {isGlobeOpen && (
-              <div className="absolute right-0 mt-2 w-56 rounded-lg border border-ink/10 bg-white p-4 text-sm text-ink/60 shadow-lg">
+              <div className="absolute right-0 mt-2 w-56 rounded-lg border border-ink/10 bg-white p-4 text-sm text-ink/60 shadow-lg z-50">
                 Language selection coming soon.
               </div>
             )}
           </div>
 
-          {/* Bell - placeholder */}
-          <div className="relative" ref={bellRef}>
+          {/* Bell - desktop: hover, mobile: tap */}
+          <div
+            className="group relative"
+            ref={bellRef}
+            onMouseEnter={() => setIsBellOpen(true)}
+            onMouseLeave={() => setIsBellOpen(false)}
+          >
             <button
               type="button"
               aria-label="Notifications"
@@ -91,7 +99,7 @@ export default function AdminNavbar({ onMenuClick }) {
             </button>
 
             {isBellOpen && (
-              <div className="absolute right-0 mt-2 w-56 rounded-lg border border-ink/10 bg-white p-4 text-sm text-ink/60 shadow-lg">
+              <div className="absolute right-0 mt-2 w-56 rounded-lg border border-ink/10 bg-white p-4 text-sm text-ink/60 shadow-lg z-50">
                 Notifications coming soon.
               </div>
             )}
